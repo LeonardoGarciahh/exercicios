@@ -1,12 +1,12 @@
-package ex1;
+package ex1.model.vo;
 
-public class Adress {
+public class Address {
     private String street;
     private String cep;
     private String uf;
     private String cidade;
 
-    public Adress(String street, String cep, String uf, String cidade) {
+    public Address(String street, String cep, String uf, String cidade) {
         this.street = street;
         this.cep = cep;
         this.uf = uf;
@@ -43,5 +43,15 @@ public class Adress {
 
     public void setCidade(String cidade) {
         this.cidade = cidade;
+    }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "street='" + street + '\'' +
+                ", cep='" + cep + '\'' +
+                ", uf='" + uf + '\'' +
+                ", cidade='" + cidade + '\'' +
+                '}';
     }
 }

@@ -1,4 +1,4 @@
-package ex1;
+package ex1.model.vo;
 
 import java.util.ArrayList;
 
@@ -6,13 +6,13 @@ public class Cliente {
     private String name;
     private String cpf;
     private ArrayList<Phone> Phones;
-    private Adress adress;
+    private Address address;
 
-    public Cliente(String name, String cpf, ArrayList<Phone> phones, Adress adress) {
+    public Cliente(String name, String cpf, ArrayList<Phone> phones, Address address) {
         this.name = name;
         this.cpf = cpf;
         Phones = phones;
-        this.adress = adress;
+        this.address = address;
     }
 
     public String getName() {
@@ -39,12 +39,12 @@ public class Cliente {
         Phones = phones;
     }
 
-    public Adress getAdress() {
-        return adress;
+    public Address getAdress() {
+        return address;
     }
 
-    public void setAdress(Adress adress) {
-        this.adress = adress;
+    public void setAdress(Address address) {
+        this.address = address;
     }
 
     @Override
@@ -53,7 +53,7 @@ public class Cliente {
                 "name='" + name + '\'' +
                 ", cpf='" + cpf + '\'' +
                 ", Phones=" + Phones +
-                ", adress=" + adress +
+                ", adress=" + address +
                 '}';
     }
 }

@@ -1,4 +1,4 @@
-package ex1;
+package ex1.model.vo;
 
 public class Phone {
     private String number;
@@ -53,5 +53,16 @@ public class Phone {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    @Override
+    public String toString() {
+        return "Phone{" +
+                "number='" + number + '\'' +
+                ", ddd=" + ddd +
+                ", ddi=" + ddi +
+                ", type='" + type + '\'' +
+                ", active=" + active +
+                '}';
     }
 }
