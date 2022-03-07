@@ -1,13 +1,14 @@
 package ex1.model.vo;
 
-public class Phone {
+public class PhoneVO {
+    private int id;
     private String number;
     private Integer ddd;
     private Integer ddi;
     private String type;
     private Boolean active;
 
-    public Phone(String number, Integer ddd, Integer ddi, String type, Boolean active) {
+    public PhoneVO(String number, Integer ddd, Integer ddi, String type, Boolean active) {
         this.number = number;
         this.ddd = ddd;
         this.ddi = ddi;
@@ -53,6 +54,14 @@ public class Phone {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override

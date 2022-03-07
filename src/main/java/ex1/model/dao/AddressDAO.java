@@ -1,23 +1,23 @@
 package ex1.model.dao;
 
-import ex1.model.vo.Address;
+import ex1.model.vo.AddressVO;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class EnderecoDAO {
+public class AddressDAO {
     //inserir
-    public boolean cadastrarNovoChamadoDAO(Address adressVO) throws SQLException {
+    public Boolean addAdress(AddressVO adressVO) throws SQLException {
         Connection conn = Banco.getConnection();
         // Statement stmt = Banco.getStatement(conn);
-        String query = "INSERT INTO ENDERECO (STREET,CEP,UF,CITY) VALUES(?,?,?,?)";
+        String query = "INSERT INTO ENDERECO (RUA,CEP,CIDADE,ESTADO,UF) VALUES(?,?,?,?,?)";
         PreparedStatement pstm = Banco.getPreparedStatement(conn, query);
         pstm.setString(1, adressVO.getStreet());
         pstm.setString(2, adressVO.getCep());
-        pstm.setString(3, adressVO.getUf());
-        pstm.setString(4,adressVO.getCidade());
+        pstm.setString(3, adressVO.getCidade());
+        pstm.setString(4,adressVO.getState());
+        pstm.setString(5,adressVO.getUf());
 
         try {
             pstm.execute();
