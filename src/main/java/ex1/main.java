@@ -22,7 +22,7 @@ public class main {
 
         ArrayList<PhoneVO> phones1 = new ArrayList<PhoneVO>(Arrays.asList(phoneVO1));
 
-        AddressVO addressVO1 = new AddressVO("João Manoel Fernandes",112, "88067040", "SC", "Florianopolis");
+        AddressVO addressVO1 = new AddressVO("João Manoel Fernandes",112, "88067040", "SC", "Florianopolis","Santa Catarina");
         AddressController adressController = new AddressController();
         AddressVO adressDB = adressController.addAdress(addressVO1);
 
