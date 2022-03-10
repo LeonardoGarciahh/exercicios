@@ -7,12 +7,14 @@ public class AddressVO {
     private String state;
     private String uf;
     private String cidade;
+    private Integer numero;
 
-    public AddressVO(String street, String cep, String uf, String cidade) {
+    public AddressVO(String street,Integer numero, String cep, String uf, String cidade) {
         this.street = street;
         this.cep = cep;
         this.uf = uf;
         this.cidade = cidade;
+        this.numero = numero;
     }
 
     public String getState() {
@@ -61,6 +63,14 @@ public class AddressVO {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Integer getNumero() {
+        return numero;
+    }
+
+    public void setNumero(Integer numero) {
+        this.numero = numero;
     }
 
     @Override

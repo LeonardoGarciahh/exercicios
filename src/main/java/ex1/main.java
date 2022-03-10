@@ -1,8 +1,12 @@
 package ex1;
 
 import ex1.controller.AddressController;
+import ex1.controller.ClienteController;
+import ex1.controller.LinhaTelefonicaController;
+import ex1.controller.PhoneController;
 import ex1.model.vo.AddressVO;
 import ex1.model.vo.ClienteVO;
+import ex1.model.vo.LinhaTelefonicaVO;
 import ex1.model.vo.PhoneVO;
 
 import java.sql.SQLException;
@@ -12,14 +16,23 @@ import java.util.Arrays;
 public class main {
     public static void main(String[] args) throws SQLException {
 
-        PhoneVO phoneVO1 = new PhoneVO("985009242", 48, 55, "Pré-pago", false);
+        PhoneVO phoneVO1 = new PhoneVO("985009242", 48, 55, 0, false);
+        PhoneController phoneController = new PhoneController();
+        PhoneVO phoneDB = phoneController.addPhone(phoneVO1);
 
         ArrayList<PhoneVO> phones1 = new ArrayList<PhoneVO>(Arrays.asList(phoneVO1));
 
-        AddressVO addressVO1 = new AddressVO("João Manoel Fernandes", "88067040", "SC", "Florianopolis");
+        AddressVO addressVO1 = new AddressVO("João Manoel Fernandes",112, "88067040", "SC", "Florianopolis");
         AddressController adressController = new AddressController();
-        adressController.addAdress(addressVO1);
-        ClienteVO client1 = new ClienteVO("Leonardo", "130.055.499.17", phones1, addressVO1);
+        AddressVO adressDB = adressController.addAdress(addressVO1);
+
+        ClienteVO client1 = new ClienteVO("Leonardo", "13005549917", phones1, addressVO1);
+        ClienteController clienteController = new ClienteController();
+        ClienteVO clientDB = clienteController.addClient(client1);
+
+        LinhaTelefonicaVO linha1 = new LinhaTelefonicaVO(clientDB.getId(),phoneDB.getId(),null);
+        LinhaTelefonicaController linhaTelefonicaController = new LinhaTelefonicaController();
+        linhaTelefonicaController.associateWithClientAndPhone(linha1);
 
         System.out.print(client1.toString());
     }

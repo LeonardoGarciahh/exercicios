@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class AddressController {
 
-    public Boolean addAdress(AddressVO adressVO) throws SQLException {
+    public AddressVO addAdress(AddressVO adressVO) throws SQLException {
         AddressBO adressBO = new AddressBO();
         return adressBO.addAdress(adressVO);
     }

@@ -6,7 +6,7 @@ import ex1.model.vo.AddressVO;
 import java.sql.SQLException;
 
 public class AddressBO {
-    public Boolean addAdress(AddressVO adressvo) throws SQLException {
+    public AddressVO addAdress(AddressVO adressvo) throws SQLException {
         AddressDAO adressDAO = new AddressDAO();
         return adressDAO.addAdress(adressvo);
     }

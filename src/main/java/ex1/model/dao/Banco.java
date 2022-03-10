@@ -8,7 +8,7 @@ public class Banco {
 	private static final String BANCODADOS = "DBTELEFONIA";
 	private static final String CONEXAO = "jdbc:mysql://localhost:3306/" + BANCODADOS;
 	private static final String USER = "root";
-	private static final String PASSWORD = "";
+	private static final String PASSWORD = "admin";
 	
 	public static Connection getConnection(){
 		try {
@@ -63,6 +63,17 @@ public class Banco {
 	public static PreparedStatement getPreparedStatement(Connection conn, String sql){
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
+			return stmt;
+		} catch (Exception e) {
+			System.out.println("Erro ao obter o PreparedStatement.");
+			System.out.println("Erro: " + e.getMessage());
+			return null;
+		}
+	}
+
+	public static PreparedStatement getPreparedStatementWithPK(Connection conn, String sql){
+		try {
+			PreparedStatement stmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 			return stmt;
 		} catch (Exception e) {
 			System.out.println("Erro ao obter o PreparedStatement.");

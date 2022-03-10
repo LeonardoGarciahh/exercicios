@@ -1,25 +1,23 @@
 package ex1.model.dao;
 
 import ex1.model.vo.AddressVO;
+import ex1.model.vo.ClienteVO;
+import ex1.model.vo.PhoneVO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class AddressDAO {
-    //inserir
-    public AddressVO addAdress(AddressVO adressVO) throws SQLException {
+public class ClientDAO {
+    public ClienteVO addClient(ClienteVO clienteVO) throws SQLException {
         Connection conn = Banco.getConnection();
         // Statement stmt = Banco.getStatement(conn);
-        String query = "INSERT INTO ENDERECO (RUA,CEP,CIDADE,ESTADO,UF,NUMERO) VALUES(?,?,?,?,?,?)";
+        String query = "INSERT INTO CLIENTE (IDENDERECO,NOME,CPF) VALUES(?,?,?)";
         PreparedStatement pstm = Banco.getPreparedStatementWithPK(conn, query);
-        pstm.setString(1, adressVO.getStreet());
-        pstm.setString(2, adressVO.getCep());
-        pstm.setString(3, adressVO.getCidade());
-        pstm.setString(4,adressVO.getState());
-        pstm.setString(5,adressVO.getUf());
-        pstm.setInt(6,adressVO.getNumero());
+        pstm.setInt(1, clienteVO.getAdress().getId());
+        pstm.setString(2, clienteVO.getName());
+        pstm.setString(3, clienteVO.getCpf());
 
         try {
             pstm.execute();
@@ -28,25 +26,18 @@ public class AddressDAO {
             if(rs.next()){
                 id = rs.getInt(1);
             }
-            adressVO.setId(id);
+            clienteVO.setId(id);
+            System.out.println(clienteVO.toString());
         } catch (SQLException e) {
-            System.out.println("Erro ao executar a query de cadastrar endereço.");
+            System.out.println("Erro ao executar a query de cadastrar cliente.");
             System.out.println("Erro: " + e.getMessage());
             return null;
         } finally {
             // Banco.closeStatement(stmt);
             Banco.closePreparedStatement(pstm);
             Banco.closeConnection(conn);
-            System.out.println("Endereço cadastrado cadastrado!");
-            return adressVO;
+            System.out.println("Cliente cadastrado cadastrado!");
+            return clienteVO;
         }
     }
-
-    // atualizar
-
-    // remover
-
-    //consultar
-
-    //consultar todos
 }

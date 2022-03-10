@@ -5,10 +5,10 @@ public class PhoneVO {
     private String number;
     private Integer ddd;
     private Integer ddi;
-    private String type;
+    private int type;
     private Boolean active;
 
-    public PhoneVO(String number, Integer ddd, Integer ddi, String type, Boolean active) {
+    public PhoneVO(String number, Integer ddd, Integer ddi, int type, Boolean active) {
         this.number = number;
         this.ddd = ddd;
         this.ddi = ddi;
@@ -40,11 +40,11 @@ public class PhoneVO {
         this.ddi = ddi;
     }
 
-    public String getType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 
@@ -67,6 +67,7 @@ public class PhoneVO {
     @Override
     public String toString() {
         return "Phone{" +
+                "id='" + id + '\'' +
                 "number='" + number + '\'' +
                 ", ddd=" + ddd +
                 ", ddi=" + ddi +
