@@ -13,4 +13,14 @@ public class ClienteController {
         ClienteBO clienteBO = new ClienteBO();
         return clienteBO.addClient(clientVO);
     }
+
+    public Boolean deletClient(ClienteVO clientVO) throws SQLException {
+        ClienteBO clienteBO = new ClienteBO();
+        return clienteBO.deletClient(clientVO);
+    }
+
+    public Boolean updateClient(ClienteVO clientVO) throws SQLException {
+        ClienteBO clienteBO = new ClienteBO();
+        return clienteBO.updateClient(clientVO);
+    }
 }

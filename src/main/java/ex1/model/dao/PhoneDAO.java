@@ -1,12 +1,10 @@
 package ex1.model.dao;
 
 import ex1.model.vo.AddressVO;
+import ex1.model.vo.ClienteVO;
 import ex1.model.vo.PhoneVO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class PhoneDAO {
     public PhoneVO addPhone(PhoneVO phoneVO) throws SQLException {
@@ -40,5 +38,46 @@ public class PhoneDAO {
             System.out.println("Telefone cadastrado cadastrado!");
             return phoneVO;
         }
+    }
+
+    public boolean updatePhone(PhoneVO phoneVO) {
+        Connection conn = Banco.getConnection();
+        Statement stmt = Banco.getStatement(conn);
+        boolean retorno = false;
+        String query = "UPDATE TELEFONE set DDI = '" + phoneVO.getDdi() + "', DDD = '"
+                + phoneVO.getDdd()   + "', NUMERO = '" + phoneVO.getNumber()
+                + "', TIPO = '" + phoneVO.getType() + "', ATIVO = '" + phoneVO.getActive()+
+                "'WHERE IDTELEFONE = " + phoneVO.getId();
+        try {
+            if (stmt.executeUpdate(query) == 1) {
+                retorno = true;
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao executar a query de atualização do telefone.");
+            System.out.println("Erro: " + e.getMessage());
+        } finally {
+            Banco.closeStatement(stmt);
+            Banco.closeConnection(conn);
+        }
+        return retorno;
+    }
+
+    public boolean deletPhone(PhoneVO phoneVO) {
+        Connection conn = Banco.getConnection();
+        Statement stmt = Banco.getStatement(conn);
+        boolean retorno = false;
+        String query = "DELETE FROM TELEFONE WHERE IDTELEFONE = " + phoneVO.getId();
+        try {
+            if (stmt.executeUpdate(query) == 1) {
+                retorno = true;
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao executar a query que deleta o telefone.");
+            System.out.println("Erro: " + e.getMessage());
+        } finally {
+            Banco.closeStatement(stmt);
+            Banco.closeConnection(conn);
+        }
+        return retorno;
     }
 }

@@ -4,10 +4,7 @@ import ex1.model.vo.AddressVO;
 import ex1.model.vo.ClienteVO;
 import ex1.model.vo.PhoneVO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class ClientDAO {
     public ClienteVO addClient(ClienteVO clienteVO) throws SQLException {
@@ -39,5 +36,45 @@ public class ClientDAO {
             System.out.println("Cliente cadastrado cadastrado!");
             return clienteVO;
         }
+    }
+
+    public boolean updateClient(ClienteVO clienteVO) {
+        Connection conn = Banco.getConnection();
+        Statement stmt = Banco.getStatement(conn);
+        boolean retorno = false;
+        String query = "UPDATE CLIENTE set IDENDERECO = '" + clienteVO.getAdress().getId() + "', NOME = '"
+                + clienteVO.getName() + "', CPF = '" + clienteVO.getCpf() +
+                "'WHERE IDENDERECO = " + clienteVO.getId();
+        try {
+            if (stmt.executeUpdate(query) == 1) {
+                retorno = true;
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao executar a query de atualização do cliente.");
+            System.out.println("Erro: " + e.getMessage());
+        } finally {
+            Banco.closeStatement(stmt);
+            Banco.closeConnection(conn);
+        }
+        return retorno;
+    }
+
+    public boolean deletClient(ClienteVO clienteVO) {
+        Connection conn = Banco.getConnection();
+        Statement stmt = Banco.getStatement(conn);
+        boolean retorno = false;
+        String query = "DELETE FROM CLIENTE WHERE IDCLIENTE = " + clienteVO.getId();
+        try {
+            if (stmt.executeUpdate(query) == 1) {
+                retorno = true;
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao executar a query que deleta o cliente.");
+            System.out.println("Erro: " + e.getMessage());
+        } finally {
+            Banco.closeStatement(stmt);
+            Banco.closeConnection(conn);
+        }
+        return retorno;
     }
 }

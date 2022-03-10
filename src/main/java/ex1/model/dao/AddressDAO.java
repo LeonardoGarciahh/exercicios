@@ -2,10 +2,7 @@ package ex1.model.dao;
 
 import ex1.model.vo.AddressVO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class AddressDAO {
     //inserir
@@ -42,9 +39,46 @@ public class AddressDAO {
         }
     }
 
-    // atualizar
+    public boolean updateAddress(AddressVO addressVO) {
+        Connection conn = Banco.getConnection();
+        Statement stmt = Banco.getStatement(conn);
+        boolean retorno = false;
+        String query = "UPDATE ENDERECO set RUA = '" + addressVO.getStreet() + "', CEP = '"
+                + addressVO.getCep() + "', CIDADE = '" + addressVO.getCidade() + "', ESTADO = '" + addressVO.getState()
+                + "', UF = '" + addressVO.getUf() + "', NUMERO = '" + addressVO.getNumero()
+                + "' WHERE IDENDERECO = " + addressVO.getId();
+        try {
+            if (stmt.executeUpdate(query) == 1) {
+                retorno = true;
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao executar a query de atualização do endereço.");
+            System.out.println("Erro: " + e.getMessage());
+        } finally {
+            Banco.closeStatement(stmt);
+            Banco.closeConnection(conn);
+        }
+        return retorno;
+    }
 
-    // remover
+    public boolean deletAdress(AddressVO addressVO) {
+        Connection conn = Banco.getConnection();
+        Statement stmt = Banco.getStatement(conn);
+        boolean retorno = false;
+        String query = "DELETE FROM ENDERECO WHERE IDENDERECO = " + addressVO.getId();
+        try {
+            if (stmt.executeUpdate(query) == 1) {
+                retorno = true;
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao executar a query que deleta o endereço.");
+            System.out.println("Erro: " + e.getMessage());
+        } finally {
+            Banco.closeStatement(stmt);
+            Banco.closeConnection(conn);
+        }
+        return retorno;
+    }
 
     //consultar
 

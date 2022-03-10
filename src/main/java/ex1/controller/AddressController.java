@@ -11,5 +11,15 @@ public class AddressController {
         AddressBO adressBO = new AddressBO();
         return adressBO.addAdress(adressVO);
     }
-    
+
+    public Boolean deletAdress(AddressVO adressVO) throws SQLException {
+        AddressBO adressBO = new AddressBO();
+        return adressBO.deletAdress(adressVO);
+    }
+
+    public Boolean updateAddress(AddressVO adressVO) throws SQLException {
+        AddressBO adressBO = new AddressBO();
+        return adressBO.updateAddress(adressVO);
+    }
+
 }

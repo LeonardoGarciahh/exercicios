@@ -14,4 +14,14 @@ public class PhoneBO {
         return phoneDAO.addPhone(phoneVO);
     }
 
+    public Boolean deletPhone(PhoneVO phoneVO) throws SQLException {
+        PhoneDAO phoneDAO = new PhoneDAO();
+        return phoneDAO.deletPhone(phoneVO);
+    }
+
+    public Boolean updatePhone(PhoneVO phoneVO) throws SQLException {
+        PhoneDAO phoneDAO = new PhoneDAO();
+        return phoneDAO.updatePhone(phoneVO);
+    }
+
 }
