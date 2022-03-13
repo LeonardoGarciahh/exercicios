@@ -9,7 +9,7 @@ public class ClienteVO {
     private ArrayList<PhoneVO> phoneVOS;
     private AddressVO addressVO;
 
-    public ClienteVO(String name, String cpf, ArrayList<PhoneVO> phoneVOS, AddressVO addressVO) {
+    public ClienteVO(String name, String cpf, AddressVO addressVO) {
         this.name = name;
         this.cpf = cpf;
         this.phoneVOS = phoneVOS;

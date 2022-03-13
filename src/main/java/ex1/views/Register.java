@@ -1,9 +1,66 @@
 package ex1.views;
 
-import javax.swing.*;
+import ex1.controller.AddressController;
+import ex1.controller.ClienteController;
+import ex1.model.vo.AddressVO;
+import ex1.model.vo.ClienteVO;
 
-public class Register {
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+
+public class Register extends JFrame {
+    private JTextField cpfField;
+    private JTextField cidadeField;
+    private JPanel mainPanel;
+    private JButton cadastrarButton;
+    private JTextField nameField;
+    private JTextField ruaField;
+    private JTextField numeroField;
+    private JTextField estadoField;
+    private JTextField cepField;
+    private JTextField ufField;
+
+    public Register() {
+        setContentPane(mainPanel);
+        setSize(500,500);
+        cadastrarButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(!cpfField.getText().trim().equals("") && !cidadeField.getText().trim().equals("") &&
+                    !nameField.getText().trim().equals("") && !ruaField.getText().trim().equals("") &&
+                    !numeroField.getText().trim().equals("") && !estadoField.getText().trim().equals("") &&
+                    !cepField.getText().trim().equals("") && !ufField.getText().trim().equals("")){
+
+                    AddressVO address = new AddressVO(ruaField.getText(),Integer.parseInt(numeroField.getText()),cepField.getText(),ufField.getText(),
+                            cidadeField.getText(),estadoField.getText());
+
+                    AddressController addressController = new AddressController();
+                    ClienteController clienteController = new ClienteController();
+                    try {
+                        address = addressController.addAdress(address);
+                        ClienteVO client = new ClienteVO(nameField.getText(),cpfField.getText(),address);
+                        clienteController.addClient(client);
+                        System.out.println(client.toString());
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+
+
+
+                }else{
+                    System.out.println("Invalido!");
+
+                }
+            }
+        });
+    }
+
+    public static void showScreen(){
+        Register register = new Register();
+        register.setLocationRelativeTo(null);
+        register.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        register.setVisible(true);
+
+    }
 }
