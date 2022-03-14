@@ -22,4 +22,9 @@ public class AddressController {
         return adressBO.updateAddress(adressVO);
     }
 
+    public AddressVO findAddress(int id) throws SQLException {
+        AddressBO adressBO = new AddressBO();
+        return adressBO.findAddress(id);
+    }
+
 }

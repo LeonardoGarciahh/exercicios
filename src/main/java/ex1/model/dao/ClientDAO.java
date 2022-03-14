@@ -1,10 +1,12 @@
 package ex1.model.dao;
 
+import ex1.controller.AddressController;
 import ex1.model.vo.AddressVO;
 import ex1.model.vo.ClienteVO;
 import ex1.model.vo.PhoneVO;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class ClientDAO {
     public ClienteVO addClient(ClienteVO clienteVO) throws SQLException {
@@ -76,5 +78,41 @@ public class ClientDAO {
             Banco.closeConnection(conn);
         }
         return retorno;
+    }
+
+    public ClienteVO findClient(int id) {
+        Connection conn = Banco.getConnection();
+        Statement stmt = Banco.getStatement(conn);
+        ResultSet resultado = null;
+        String query;
+        ArrayList<ClienteVO> clienteVOList = new ArrayList<ClienteVO>();
+        ClienteVO clienteVO = new ClienteVO();
+        AddressController addressController = new AddressController();
+        if (id > 0) {
+            query = "SELECT * FROM CLIENTE WHERE IDCLIENTE = " + id;
+        } else {
+            query = "SELECT * FROM CLIENTE";
+        }
+
+        try {
+            resultado = stmt.executeQuery(query);
+            while (resultado.next()) {
+                clienteVO.setId(resultado.getInt(1));
+                clienteVO.setAdress(addressController.findAddress(resultado.getInt(2)));
+                clienteVO.setName(resultado.getString(3));
+                clienteVO.setCpf(resultado.getString(4));
+
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao executar a query que busca os clientes.");
+            System.out.println("Erro: " + e.getMessage());
+        } finally {
+            Banco.closeResultSet(resultado);
+            Banco.closeStatement(stmt);
+            Banco.closeConnection(conn);
+        }
+
+        return clienteVO;
     }
 }

@@ -80,6 +80,42 @@ public class AddressDAO {
         return retorno;
     }
 
+    public AddressVO findAddress(int id) {
+        Connection conn = Banco.getConnection();
+        Statement stmt = Banco.getStatement(conn);
+        ResultSet resultado = null;
+        String query;
+        AddressVO addressVO = new AddressVO();
+
+        if (id > 0) {
+            query = "SELECT * FROM ENDERECO WHERE IDENDERECO = " + id;
+        } else {
+            query = "SELECT * FROM ENDERECO";
+        }
+
+        try {
+            resultado = stmt.executeQuery(query);
+            while (resultado.next()) {
+                addressVO.setId(resultado.getInt(1));
+                addressVO.setStreet(resultado.getString(2));
+                addressVO.setCep(resultado.getString(3));
+                addressVO.setCidade(resultado.getString(4));
+                addressVO.setState(resultado.getString(5));
+                addressVO.setUf(resultado.getString(6));
+                addressVO.setNumero(resultado.getInt(7));
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao executar a query que busca os endereços.");
+            System.out.println("Erro: " + e.getMessage());
+        } finally {
+            Banco.closeResultSet(resultado);
+            Banco.closeStatement(stmt);
+            Banco.closeConnection(conn);
+        }
+
+        return addressVO;
+    }
     //consultar
 
     //consultar todos

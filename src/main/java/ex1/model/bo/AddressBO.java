@@ -21,4 +21,8 @@ public class AddressBO {
         return adressDAO.updateAddress(adressvo);
     }
 
+    public AddressVO findAddress(int id) {
+        AddressDAO adressDAO = new AddressDAO();
+        return adressDAO.findAddress(id);
+    }
 }

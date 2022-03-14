@@ -23,4 +23,9 @@ public class ClienteController {
         ClienteBO clienteBO = new ClienteBO();
         return clienteBO.updateClient(clientVO);
     }
+
+    public ClienteVO findClient(int id) throws SQLException {
+        ClienteBO clienteBO = new ClienteBO();
+        return clienteBO.findClient(id);
+    }
 }

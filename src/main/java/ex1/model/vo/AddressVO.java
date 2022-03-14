@@ -9,7 +9,11 @@ public class AddressVO {
     private String cidade;
     private Integer numero;
 
-    public AddressVO(String street,Integer numero, String cep, String uf, String cidade,String state) {
+    public AddressVO() {
+
+    }
+
+    public AddressVO(String street, Integer numero, String cep, String uf, String cidade, String state) {
         this.street = street;
         this.cep = cep;
         this.uf = uf;

@@ -25,4 +25,9 @@ public class ClienteBO {
         ClientDAO clienteDAO = new ClientDAO();
         return clienteDAO.updateClient(clienteVO);
     }
+
+    public ClienteVO findClient(int id) {
+        ClientDAO clienteDAO = new ClientDAO();
+        return clienteDAO.findClient(id);
+    }
 }
