@@ -9,10 +9,9 @@ public class LinhaTelefonicaVO {
     private Date Dt_Ativacao;
     private Date Dt_Desativacao;
 
-    public LinhaTelefonicaVO(int idcliente, int idtelefone,Date dt_Desativacao) {
+    public LinhaTelefonicaVO(int idcliente, int idtelefone) {
         this.idcliente = idcliente;
         this.idtelefone = idtelefone;
-        Dt_Desativacao = dt_Desativacao;
     }
 
     public int getId() {

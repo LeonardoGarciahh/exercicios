@@ -9,6 +9,7 @@ import ex1.model.vo.ClienteVO;
 import ex1.model.vo.LinhaTelefonicaVO;
 import ex1.model.vo.PhoneVO;
 import ex1.views.Register;
+import ex1.views.Telefone;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,8 +18,8 @@ import java.util.Arrays;
 public class main {
     public static void main(String[] args) throws SQLException {
 
-        Register.showScreen();
-
+//        Register.showScreen();
+        Telefone.showScreen();
 //        PhoneVO phoneVO1 = new PhoneVO("985009242", 48, 55, 0, false);
 //        PhoneController phoneController = new PhoneController();
 //        PhoneVO phoneDB = phoneController.addPhone(phoneVO1);

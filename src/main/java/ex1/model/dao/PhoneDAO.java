@@ -10,13 +10,12 @@ public class PhoneDAO {
     public PhoneVO addPhone(PhoneVO phoneVO) throws SQLException {
         Connection conn = Banco.getConnection();
         // Statement stmt = Banco.getStatement(conn);
-        String query = "INSERT INTO TELEFONE (DDI,DDD,NUMERO,TIPO,ATIVO) VALUES(?,?,?,?,?)";
+        String query = "INSERT INTO TELEFONE (DDI,DDD,NUMERO,TIPO) VALUES(?,?,?,?)";
         PreparedStatement pstm = Banco.getPreparedStatementWithPK(conn, query);
         pstm.setInt(1, phoneVO.getDdi());
         pstm.setInt(2, phoneVO.getDdd());
         pstm.setString(3, phoneVO.getNumber());
         pstm.setInt(4, phoneVO.getType());
-        pstm.setBoolean(5, phoneVO.getActive());
 
         try {
             pstm.execute();
