@@ -24,7 +24,7 @@ public class Register extends JFrame {
 
     public Register() {
         setContentPane(mainPanel);
-        setSize(500,500);
+        setSize(500,200);
         cadastrarButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(!cpfField.getText().trim().equals("") && !cidadeField.getText().trim().equals("") &&
@@ -41,7 +41,6 @@ public class Register extends JFrame {
                         address = addressController.addAdress(address);
                         ClienteVO client = new ClienteVO(nameField.getText(),cpfField.getText(),address);
                         clienteController.addClient(client);
-                        System.out.println(client.toString());
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
@@ -49,7 +48,7 @@ public class Register extends JFrame {
 
 
                 }else{
-                    System.out.println("Invalido!");
+                    JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos!");
 
                 }
             }
