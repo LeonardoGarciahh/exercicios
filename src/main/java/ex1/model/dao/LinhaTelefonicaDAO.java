@@ -1,13 +1,13 @@
 package ex1.model.dao;
 
 import ex1.controller.PhoneController;
-import ex1.model.vo.AddressVO;
-import ex1.model.vo.ClienteVO;
 import ex1.model.vo.LinhaTelefonicaVO;
 import ex1.model.vo.PhoneVO;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class LinhaTelefonicaDAO {
 
@@ -75,6 +75,21 @@ public class LinhaTelefonicaDAO {
         } catch (SQLException e) {
             System.out.println("Erro ao executar a query que deleta a linha telefonica.");
             System.out.println("Erro: " + e.getMessage());
+        } finally {
+            Banco.closeStatement(stmt);
+            Banco.closeConnection(conn);
+        }
+        return retorno;
+    }
+
+    public boolean disableLine(LinhaTelefonicaVO linhaTelefonicaVO){
+        Connection conn = Banco.getConnection();
+        Statement stmt = Banco.getStatement(conn);
+        boolean retorno = false;
+        String query = "DELETE FROM LINHA_TELEFONICA WHERE IDLINHATELEFONICA = " + linhaTelefonicaVO.getId();
+        try {
+            linhaTelefonicaVO.setDt_Desativacao(LocalDate.now());
+            updateLine(linhaTelefonicaVO);
         } finally {
             Banco.closeStatement(stmt);
             Banco.closeConnection(conn);

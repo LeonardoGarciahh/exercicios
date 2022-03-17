@@ -32,4 +32,9 @@ public class LinhaTelefonicaController {
         return linhaTelefonicaBO.findPhoneByClient(idcliente);
     }
 
+    public boolean disableLine(LinhaTelefonicaVO linhaTelefonicaVO) throws SQLException {
+        LinhaTelefonicaBO linhaTelefonicaBO = new LinhaTelefonicaBO();
+        return linhaTelefonicaBO.disableLine(linhaTelefonicaVO);
+    }
+
 }

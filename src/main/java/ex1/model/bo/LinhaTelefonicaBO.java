@@ -31,4 +31,9 @@ public class LinhaTelefonicaBO {
         LinhaTelefonicaDAO linhaTelefonicaDAO = new LinhaTelefonicaDAO();
         return linhaTelefonicaDAO.findPhoneByClient(idcliente);
     }
+
+    public boolean disableLine(LinhaTelefonicaVO linhaTelefonicaVO) {
+        LinhaTelefonicaDAO linhaTelefonicaDAO = new LinhaTelefonicaDAO();
+        return linhaTelefonicaDAO.disableLine(linhaTelefonicaVO);
+    }
 }

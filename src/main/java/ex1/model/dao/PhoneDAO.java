@@ -12,7 +12,7 @@ public class PhoneDAO {
     public PhoneVO addPhone(PhoneVO phoneVO) throws SQLException {
         Connection conn = Banco.getConnection();
         // Statement stmt = Banco.getStatement(conn);
-        String query = "INSERT INTO TELEFONE (DDI,DDD,NUMERO,TIPO) VALUES(?,?,?,?)";
+        String query = "INSERT INTO TELEFONE (DDI,DDD,NUMERO,TIPO,ATIVO) VALUES(?,?,?,?,True)";
         PreparedStatement pstm = Banco.getPreparedStatementWithPK(conn, query);
         pstm.setInt(1, phoneVO.getDdi());
         pstm.setInt(2, phoneVO.getDdd());
