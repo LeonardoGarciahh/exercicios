@@ -8,6 +8,7 @@ import ex1.model.vo.LinhaTelefonicaVO;
 import ex1.model.vo.PhoneVO;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class LinhaTelefonicaBO {
 
@@ -26,4 +27,8 @@ public class LinhaTelefonicaBO {
         return linhaTelefonicaDAO.updateLine(linhaTelefonicaVO);
     }
 
+    public ArrayList<PhoneVO> findPhoneByClient(Integer idcliente) {
+        LinhaTelefonicaDAO linhaTelefonicaDAO = new LinhaTelefonicaDAO();
+        return linhaTelefonicaDAO.findPhoneByClient(idcliente);
+    }
 }

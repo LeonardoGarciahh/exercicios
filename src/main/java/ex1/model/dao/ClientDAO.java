@@ -1,6 +1,7 @@
 package ex1.model.dao;
 
 import ex1.controller.AddressController;
+import ex1.controller.LinhaTelefonicaController;
 import ex1.model.vo.AddressVO;
 import ex1.model.vo.ClienteVO;
 import ex1.model.vo.PhoneVO;
@@ -46,7 +47,7 @@ public class ClientDAO {
         boolean retorno = false;
         String query = "UPDATE CLIENTE set IDENDERECO = '" + clienteVO.getAdress().getId() + "', NOME = '"
                 + clienteVO.getName() + "', CPF = '" + clienteVO.getCpf() +
-                "'WHERE IDENDERECO = " + clienteVO.getId();
+                "'WHERE IDCLIENTE = " + clienteVO.getId();
         try {
             if (stmt.executeUpdate(query) == 1) {
                 retorno = true;
@@ -88,6 +89,7 @@ public class ClientDAO {
         ArrayList<ClienteVO> clienteVOList = new ArrayList<ClienteVO>();
         ClienteVO clienteVO = new ClienteVO();
         AddressController addressController = new AddressController();
+        LinhaTelefonicaController linhaTelefonicaController = new LinhaTelefonicaController();
         if (id > 0) {
             query = "SELECT * FROM CLIENTE WHERE IDCLIENTE = " + id;
         } else {
@@ -101,6 +103,7 @@ public class ClientDAO {
                 clienteVO.setAdress(addressController.findAddress(resultado.getInt(2)));
                 clienteVO.setName(resultado.getString(3));
                 clienteVO.setCpf(resultado.getString(4));
+                clienteVO.setPhones(linhaTelefonicaController.findPhoneByClient(id));
 
             }
 

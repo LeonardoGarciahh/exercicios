@@ -6,6 +6,7 @@ import ex1.model.vo.AddressVO;
 import ex1.model.vo.PhoneVO;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class PhoneBO {
 
@@ -24,4 +25,8 @@ public class PhoneBO {
         return phoneDAO.updatePhone(phoneVO);
     }
 
+    public PhoneVO findPhone(Integer id) {
+        PhoneDAO phoneDAO = new PhoneDAO();
+        return phoneDAO.findPhone(id);
+    }
 }

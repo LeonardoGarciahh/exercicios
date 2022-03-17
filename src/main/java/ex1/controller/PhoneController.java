@@ -8,6 +8,7 @@ import ex1.model.vo.ClienteVO;
 import ex1.model.vo.PhoneVO;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class PhoneController {
 
@@ -24,6 +25,11 @@ public class PhoneController {
     public Boolean updatePhone(PhoneVO phoneVO) throws SQLException {
         PhoneBO phoneBO = new PhoneBO();
         return phoneBO.updatePhone(phoneVO);
+    }
+
+    public PhoneVO findPhone(Integer id) throws SQLException {
+        PhoneBO phoneBO = new PhoneBO();
+        return phoneBO.findPhone(id);
     }
 }
 

@@ -8,6 +8,10 @@ public class PhoneVO {
     private int type;
     private Boolean active;
 
+    public PhoneVO() {
+
+    }
+
     public PhoneVO(String number, Integer ddd, Integer ddi, int type) {
         this.number = number;
         this.ddd = ddd;

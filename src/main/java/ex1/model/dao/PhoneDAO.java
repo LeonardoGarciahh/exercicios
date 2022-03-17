@@ -1,10 +1,12 @@
 package ex1.model.dao;
 
+import ex1.controller.AddressController;
 import ex1.model.vo.AddressVO;
 import ex1.model.vo.ClienteVO;
 import ex1.model.vo.PhoneVO;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class PhoneDAO {
     public PhoneVO addPhone(PhoneVO phoneVO) throws SQLException {
@@ -78,5 +80,40 @@ public class PhoneDAO {
             Banco.closeConnection(conn);
         }
         return retorno;
+    }
+
+    public PhoneVO findPhone(Integer id){
+        Connection conn = Banco.getConnection();
+        Statement stmt = Banco.getStatement(conn);
+        ResultSet resultado = null;
+        String query;
+        ArrayList<PhoneVO> telefoneVOlist = new ArrayList<PhoneVO>();
+        PhoneVO phoneVO = new PhoneVO();
+
+            query = "SELECT * FROM TELEFONE WHERE IDTELEFONE = " + id;
+
+
+        try {
+            resultado = stmt.executeQuery(query);
+            if (resultado.next()) {
+                phoneVO.setId(resultado.getInt(1));
+                phoneVO.setDdi(resultado.getInt(2));
+                phoneVO.setDdd(resultado.getInt(3));
+                phoneVO.setNumber(resultado.getString(4));
+                phoneVO.setType(resultado.getInt(5));
+                phoneVO.setActive(resultado.getBoolean(6));
+
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao executar a query que busca os telefones.");
+            System.out.println("Erro: " + e.getMessage());
+        } finally {
+            Banco.closeResultSet(resultado);
+            Banco.closeStatement(stmt);
+            Banco.closeConnection(conn);
+        }
+
+        return phoneVO;
     }
 }

@@ -8,6 +8,7 @@ import ex1.model.vo.LinhaTelefonicaVO;
 import ex1.model.vo.PhoneVO;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class LinhaTelefonicaController {
 
@@ -24,6 +25,11 @@ public class LinhaTelefonicaController {
     public Boolean updateLine(LinhaTelefonicaVO linhaTelefonicaVO) throws SQLException {
         LinhaTelefonicaBO linhaTelefonicaBO = new LinhaTelefonicaBO();
         return linhaTelefonicaBO.updateClient(linhaTelefonicaVO);
+    }
+
+    public ArrayList<PhoneVO> findPhoneByClient(Integer idcliente) throws SQLException {
+        LinhaTelefonicaBO linhaTelefonicaBO = new LinhaTelefonicaBO();
+        return linhaTelefonicaBO.findPhoneByClient(idcliente);
     }
 
 }

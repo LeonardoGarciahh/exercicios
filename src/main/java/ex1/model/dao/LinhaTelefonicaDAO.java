@@ -1,11 +1,13 @@
 package ex1.model.dao;
 
+import ex1.controller.PhoneController;
 import ex1.model.vo.AddressVO;
 import ex1.model.vo.ClienteVO;
 import ex1.model.vo.LinhaTelefonicaVO;
 import ex1.model.vo.PhoneVO;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class LinhaTelefonicaDAO {
 
@@ -78,6 +80,37 @@ public class LinhaTelefonicaDAO {
             Banco.closeConnection(conn);
         }
         return retorno;
+    }
+
+    public ArrayList<PhoneVO> findPhoneByClient(Integer idcliente){
+        Connection conn = Banco.getConnection();
+        Statement stmt = Banco.getStatement(conn);
+        ResultSet resultado = null;
+        String query;
+        ArrayList<PhoneVO> telefoneVOlist = new ArrayList<PhoneVO>();
+        PhoneVO phoneVO = new PhoneVO();
+
+        query = "SELECT * FROM LINHA_TELEFONICA WHERE IDCLIENTE = " + idcliente;
+        PhoneController phoneController = new PhoneController();
+
+        try {
+            resultado = stmt.executeQuery(query);
+            while (resultado.next()) {
+                PhoneVO phone = new PhoneVO();
+                phone = phoneController.findPhone(resultado.getInt(5));
+                telefoneVOlist.add(phone);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao executar a query que busca os telefones do cliente.");
+            System.out.println("Erro: " + e.getMessage());
+        } finally {
+            Banco.closeResultSet(resultado);
+            Banco.closeStatement(stmt);
+            Banco.closeConnection(conn);
+        }
+
+        return telefoneVOlist;
     }
 
 }
