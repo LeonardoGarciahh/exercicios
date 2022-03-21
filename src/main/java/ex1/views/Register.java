@@ -73,7 +73,7 @@ public class Register extends JFrame {
                 !nameField.getText().trim().equals("") && !ruaField.getText().trim().equals("") &&
                 !numeroField.getText().trim().equals("") && !estadoField.getText().trim().equals("") &&
                 !cepField.getText().trim().equals("")) {
-               if (cpfField.getText().length() <= 11) {
+               if (cpfField.getText().length() == 11) {
 
 
                AddressVO address = new AddressVO(ruaField.getText(), Integer.parseInt(numeroField.getText()), cepField.getText(), (String) comboBox1.getSelectedItem(),
