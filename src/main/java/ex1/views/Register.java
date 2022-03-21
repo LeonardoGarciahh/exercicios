@@ -29,7 +29,7 @@ public class Register extends JFrame {
 
     public Register() throws SQLException {
         setContentPane(mainPanel);
-        setSize(500,200);
+        setSize(600,250);
         List<String> list = new ArrayList<>(Arrays.asList("AC",
                 "AL",
                 "AP",
@@ -72,22 +72,26 @@ public class Register extends JFrame {
            if(!cpfField.getText().trim().equals("") && !cidadeField.getText().trim().equals("") &&
                 !nameField.getText().trim().equals("") && !ruaField.getText().trim().equals("") &&
                 !numeroField.getText().trim().equals("") && !estadoField.getText().trim().equals("") &&
-                !cepField.getText().trim().equals("")){
-
-                AddressVO address = new AddressVO(ruaField.getText(),Integer.parseInt(numeroField.getText()),cepField.getText(), (String) comboBox1.getSelectedItem(),
-                        cidadeField.getText(),estadoField.getText());
-
-                ClienteController clienteController = new ClienteController();
-                try {
-                    address = addressController.addAdress(address);
-                    ClienteVO client = new ClienteVO(nameField.getText(),cpfField.getText(),address);
-                    clienteController.addClient(client);
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
+                !cepField.getText().trim().equals("")) {
+               if (cpfField.getText().length() <= 11) {
 
 
+               AddressVO address = new AddressVO(ruaField.getText(), Integer.parseInt(numeroField.getText()), cepField.getText(), (String) comboBox1.getSelectedItem(),
+                       cidadeField.getText(), estadoField.getText());
 
+               ClienteController clienteController = new ClienteController();
+               try {
+                   address = addressController.addAdress(address);
+                   ClienteVO client = new ClienteVO(nameField.getText(), cpfField.getText(), address);
+                   clienteController.addClient(client);
+               } catch (SQLException ex) {
+                   ex.printStackTrace();
+               }
+
+
+           }else {
+                   JOptionPane.showMessageDialog(null, "Tamanho do cpf é de 11 digitos!");
+           }
             }else{
                 JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos!");
 
