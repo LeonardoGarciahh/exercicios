@@ -84,11 +84,10 @@ public class AddressVO {
 
     @Override
     public String toString() {
-        return "Address{" +
-                "street='" + street + '\'' +
-                ", cep='" + cep + '\'' +
-                ", uf='" + uf + '\'' +
-                ", cidade='" + cidade + '\'' +
-                '}';
+        return "id: "+id+
+                ", Rua: '" + street + '\'' +
+                ", Cep: '" + cep + '\'' +
+                ", Uf: '" + uf + '\'' +
+                ", Cidade: '" + cidade;
     }
 }

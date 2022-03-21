@@ -18,16 +18,16 @@ import java.util.Arrays;
 public class main {
     public static void main(String[] args) throws SQLException {
 
-        ClienteController clienteController = new ClienteController();
-        ClienteVO cliente = clienteController.findClient(1);
-        System.out.println(cliente);
+//        ClienteController clienteController = new ClienteController();
+//        ClienteVO cliente = clienteController.findClient(1);
+//        System.out.println(cliente);
 //        cliente.setName("Arlindo");
 //        System.out.println(clienteController.updateClient(cliente));
 //
 //        LinhaTelefonicaController linhaTelefonicaController = new LinhaTelefonicaController();
 //        System.out.println(linhaTelefonicaController.findPhoneByClient(1));
 
-//        Register.showScreen()
+        Register.showScreen();
 //        Telefone.showScreen();
 //        PhoneVO phoneVO1 = new PhoneVO("985009242", 48, 55, 0, false);
 //        PhoneController phoneController = new PhoneController();

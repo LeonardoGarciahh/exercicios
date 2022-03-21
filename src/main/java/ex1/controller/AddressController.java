@@ -4,6 +4,7 @@ import ex1.model.bo.AddressBO;
 import ex1.model.vo.AddressVO;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class AddressController {
 
@@ -25,6 +26,10 @@ public class AddressController {
     public AddressVO findAddress(int id) throws SQLException {
         AddressBO adressBO = new AddressBO();
         return adressBO.findAddress(id);
+    }
+    public ArrayList<AddressVO> findAllAddress() throws SQLException {
+        AddressBO adressBO = new AddressBO();
+        return adressBO.findAllAddress();
     }
 
 }

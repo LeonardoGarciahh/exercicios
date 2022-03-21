@@ -118,4 +118,42 @@ public class ClientDAO {
 
         return clienteVO;
     }
+
+    public boolean findClientByCpf(String cpf) {
+        Connection conn = Banco.getConnection();
+        Statement stmt = Banco.getStatement(conn);
+        ResultSet resultado = null;
+        String query;
+        boolean result = false;
+
+        ClienteVO clienteVO = new ClienteVO();
+        AddressController addressController = new AddressController();
+        LinhaTelefonicaController linhaTelefonicaController = new LinhaTelefonicaController();
+        if (cpf != "") {
+            query = "SELECT * FROM CLIENTE WHERE CPF = " + cpf;
+        } else {
+            query = "SELECT * FROM CLIENTE";
+        }
+
+        try {
+            resultado = stmt.executeQuery(query);
+            if (resultado.next()) {
+                clienteVO.setId(resultado.getInt(1));
+                clienteVO.setAdress(addressController.findAddress(resultado.getInt(2)));
+                clienteVO.setName(resultado.getString(3));
+                clienteVO.setCpf(resultado.getString(4));
+                result = true;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao executar a query que busca os clientes pelo cpf.");
+            System.out.println("Erro: " + e.getMessage());
+        } finally {
+            Banco.closeResultSet(resultado);
+            Banco.closeStatement(stmt);
+            Banco.closeConnection(conn);
+        }
+
+        return result;
+    }
 }

@@ -28,4 +28,9 @@ public class ClienteController {
         ClienteBO clienteBO = new ClienteBO();
         return clienteBO.findClient(id);
     }
+
+    public Boolean findClientByCpf(String cpf) throws SQLException {
+        ClienteBO clienteBO = new ClienteBO();
+        return clienteBO.findClientByCpf(cpf);
+    }
 }

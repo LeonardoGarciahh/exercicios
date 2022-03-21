@@ -3,6 +3,7 @@ package ex1.model.dao;
 import ex1.model.vo.AddressVO;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class AddressDAO {
     //inserir
@@ -119,4 +120,39 @@ public class AddressDAO {
     //consultar
 
     //consultar todos
+    public ArrayList<AddressVO> findAllAddress() {
+        Connection conn = Banco.getConnection();
+        Statement stmt = Banco.getStatement(conn);
+        ResultSet resultado = null;
+        String query;
+        ArrayList<AddressVO> addressList = new ArrayList<AddressVO>();
+
+            query = "SELECT * FROM ENDERECO";
+
+
+        try {
+            resultado = stmt.executeQuery(query);
+            while (resultado.next()) {
+                AddressVO addressVO = new AddressVO();
+                addressVO.setId(resultado.getInt(1));
+                addressVO.setStreet(resultado.getString(2));
+                addressVO.setCep(resultado.getString(3));
+                addressVO.setCidade(resultado.getString(4));
+                addressVO.setState(resultado.getString(5));
+                addressVO.setUf(resultado.getString(6));
+                addressVO.setNumero(resultado.getInt(7));
+                addressList.add(addressVO);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao executar a query que busca os endereços.");
+            System.out.println("Erro: " + e.getMessage());
+        } finally {
+            Banco.closeResultSet(resultado);
+            Banco.closeStatement(stmt);
+            Banco.closeConnection(conn);
+        }
+
+        return addressList;
+    }
 }
