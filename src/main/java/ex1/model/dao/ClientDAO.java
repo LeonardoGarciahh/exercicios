@@ -81,6 +81,43 @@ public class ClientDAO {
         return retorno;
     }
 
+    public ArrayList<ClienteVO> findAllClients() {
+        Connection conn = Banco.getConnection();
+        Statement stmt = Banco.getStatement(conn);
+        ResultSet resultado = null;
+        String query;
+        ArrayList<ClienteVO> clienteVOList = new ArrayList<ClienteVO>();
+
+        AddressController addressController = new AddressController();
+        LinhaTelefonicaController linhaTelefonicaController = new LinhaTelefonicaController();
+
+            query = "SELECT * FROM CLIENTE";
+
+
+        try {
+            resultado = stmt.executeQuery(query);
+            while (resultado.next()) {
+                ClienteVO clienteVO = new ClienteVO();
+                clienteVO.setId(resultado.getInt(1));
+                clienteVO.setAdress(addressController.findAddress(resultado.getInt(2)));
+                clienteVO.setName(resultado.getString(3));
+                clienteVO.setCpf(resultado.getString(4));
+                clienteVO.setPhones(linhaTelefonicaController.findPhoneByClient(resultado.getInt(1)));
+                clienteVOList.add(clienteVO);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao executar a query que busca todos os clientes.");
+            System.out.println("Erro: " + e.getMessage());
+        } finally {
+            Banco.closeResultSet(resultado);
+            Banco.closeStatement(stmt);
+            Banco.closeConnection(conn);
+        }
+
+        return clienteVOList;
+    }
+
     public ClienteVO findClient(int id) {
         Connection conn = Banco.getConnection();
         Statement stmt = Banco.getStatement(conn);

@@ -6,6 +6,7 @@ import ex1.model.vo.AddressVO;
 import ex1.model.vo.ClienteVO;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class ClienteController {
 
@@ -32,5 +33,10 @@ public class ClienteController {
     public Boolean findClientByCpf(String cpf) throws SQLException {
         ClienteBO clienteBO = new ClienteBO();
         return clienteBO.findClientByCpf(cpf);
+    }
+
+    public ArrayList<ClienteVO> findAllClients() throws SQLException {
+        ClienteBO clienteBO = new ClienteBO();
+        return clienteBO.findAllClients();
     }
 }
