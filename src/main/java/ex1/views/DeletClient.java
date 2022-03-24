@@ -31,7 +31,12 @@ public class DeletClient extends JFrame{
                 ClienteVO clienteVO = new ClienteVO();
                 clienteVO.setId(id);
                 try {
-                    clienteController.deletClient(clienteVO);
+                    boolean deleted = clienteController.deletClient(clienteVO);
+                    if(deleted){
+                        JOptionPane.showMessageDialog(null,"Cliente deletado com sucesso!","DELETAR CLIENTE",JOptionPane.INFORMATION_MESSAGE);
+                    }else{
+                        JOptionPane.showMessageDialog(null,"Esse usuário possui um telefone!","DELETAR CLIENTE",JOptionPane.ERROR_MESSAGE);
+                    }
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }

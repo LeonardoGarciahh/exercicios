@@ -31,9 +31,8 @@ public class ClienteBO {
         if(phones.size() == 0) {
             return clienteDAO.deletClient(clienteVO);
         }else{
-            JOptionPane.showMessageDialog(null,"Esse usuário possui um telefone!","DELETAR CLIENTE",JOptionPane.ERROR_MESSAGE);
+            return false;
         }
-        return null;
     }
 
     public Boolean updateClient(ClienteVO clienteVO) throws SQLException {
