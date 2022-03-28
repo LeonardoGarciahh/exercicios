@@ -76,7 +76,7 @@ public class DeletClient extends JFrame{
     public static void showScreen() throws SQLException {
         deletClient = new DeletClient();
         deletClient.setLocationRelativeTo(null);
-        deletClient.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//        deletClient.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         deletClient.setVisible(true);
     }
 }

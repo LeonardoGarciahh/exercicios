@@ -46,7 +46,7 @@ public class Telefone extends JFrame{
     public static void showScreen(){
         Telefone telefone = new Telefone();
         telefone.setLocationRelativeTo(null);
-        telefone.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//        telefone.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         telefone.setVisible(true);
 
     }
