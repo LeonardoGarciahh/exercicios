@@ -16,6 +16,7 @@ public class Menu extends JFrame{
         setContentPane(panel);
         setSize(400,150);
 
+
         clienteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -52,9 +53,15 @@ public class Menu extends JFrame{
 
     public static void showScreen() throws SQLException {
         menuFrame = new Menu();
+        menuFrame.setResizable(false);
+
         menuFrame.setLocationRelativeTo(null);
         menuFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         menuFrame.setVisible(true);
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
     }
 }
 

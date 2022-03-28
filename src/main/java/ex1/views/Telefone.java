@@ -21,7 +21,8 @@ public class Telefone extends JFrame{
 
     public Telefone() {
         setContentPane(panel1);
-        setSize(500,200);
+        setSize(500,150);
+
         cadastrarButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(!ddiField.getText().trim().equals("") && !dddField.getText().trim().equals("") &&
@@ -45,6 +46,7 @@ public class Telefone extends JFrame{
     }
     public static void showScreen(){
         Telefone telefone = new Telefone();
+        telefone.setResizable(false);
         telefone.setLocationRelativeTo(null);
 //        telefone.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         telefone.setVisible(true);

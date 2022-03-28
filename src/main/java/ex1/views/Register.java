@@ -120,6 +120,8 @@ public class Register extends JFrame {
 
     public static void showScreen() throws SQLException {
         Register register = new Register();
+        register.setResizable(false);
+
         register.setLocationRelativeTo(null);
 //        register.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         register.setVisible(true);
