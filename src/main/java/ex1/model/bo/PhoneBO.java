@@ -29,4 +29,9 @@ public class PhoneBO {
         PhoneDAO phoneDAO = new PhoneDAO();
         return phoneDAO.findPhone(id);
     }
+
+    public ArrayList<PhoneVO> findPhoneNotActive() {
+        PhoneDAO phoneDAO = new PhoneDAO();
+        return phoneDAO.findPhoneNotActive();
+    }
 }

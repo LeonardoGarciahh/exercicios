@@ -10,6 +10,7 @@ public class Menu extends JFrame{
     private JButton telefoneButton;
     private JButton deletarClienteButton;
     private JPanel panel;
+    private JButton associarTelefoneAoClienteButton;
     public static Menu menuFrame;
 
     public Menu() {
@@ -43,6 +44,17 @@ public class Menu extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 try {
                     DeletClient.showScreen();
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+        associarTelefoneAoClienteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    AssociatePhoneAndClient.showScreen();
 
                 } catch (Exception ex) {
                     ex.printStackTrace();

@@ -7,6 +7,7 @@ import ex1.model.vo.AddressVO;
 import ex1.model.vo.ClienteVO;
 import ex1.model.vo.PhoneVO;
 
+import java.sql.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -30,6 +31,11 @@ public class PhoneController {
     public PhoneVO findPhone(Integer id) throws SQLException {
         PhoneBO phoneBO = new PhoneBO();
         return phoneBO.findPhone(id);
+    }
+
+    public ArrayList<PhoneVO> findPhoneNotActive() throws SQLException {
+        PhoneBO phoneBO = new PhoneBO();
+        return phoneBO.findPhoneNotActive();
     }
 }
 

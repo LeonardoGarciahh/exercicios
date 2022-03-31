@@ -12,7 +12,7 @@ public class PhoneDAO {
     public PhoneVO addPhone(PhoneVO phoneVO) throws SQLException {
         Connection conn = Banco.getConnection();
         // Statement stmt = Banco.getStatement(conn);
-        String query = "INSERT INTO TELEFONE (DDI,DDD,NUMERO,TIPO,ATIVO) VALUES(?,?,?,?,True)";
+        String query = "INSERT INTO TELEFONE (DDI,DDD,NUMERO,TIPO,ATIVO) VALUES(?,?,?,?,False)";
         PreparedStatement pstm = Banco.getPreparedStatementWithPK(conn, query);
         pstm.setInt(1, phoneVO.getDdi());
         pstm.setInt(2, phoneVO.getDdd());
@@ -115,5 +115,41 @@ public class PhoneDAO {
         }
 
         return phoneVO;
+    }
+
+    public ArrayList<PhoneVO> findPhoneNotActive(){
+        Connection conn = Banco.getConnection();
+        Statement stmt = Banco.getStatement(conn);
+        ResultSet resultado = null;
+        String query;
+        ArrayList<PhoneVO> telefoneVOlist = new ArrayList<PhoneVO>();
+
+
+        query = "SELECT * FROM TELEFONE WHERE ATIVO = 0";
+
+
+        try {
+            resultado = stmt.executeQuery(query);
+            while (resultado.next()) {
+                PhoneVO phoneVO = new PhoneVO();
+                phoneVO.setId(resultado.getInt(1));
+                phoneVO.setDdi(resultado.getInt(2));
+                phoneVO.setDdd(resultado.getInt(3));
+                phoneVO.setNumber(resultado.getString(4));
+                phoneVO.setType(resultado.getInt(5));
+                phoneVO.setActive(resultado.getBoolean(6));
+                telefoneVOlist.add(phoneVO);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao executar a query que busca os telefones.");
+            System.out.println("Erro: " + e.getMessage());
+        } finally {
+            Banco.closeResultSet(resultado);
+            Banco.closeStatement(stmt);
+            Banco.closeConnection(conn);
+        }
+
+        return telefoneVOlist;
     }
 }
