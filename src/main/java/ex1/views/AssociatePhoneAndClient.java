@@ -31,7 +31,6 @@ public class AssociatePhoneAndClient extends JFrame{
 
         clients = clienteController.findAllClients();
         phones = phoneController.findPhoneNotActive();
-        System.out.println(phones);
         for(int c = 0;c<clients.size();c++){
             clienteBox.addItem(clients.get(c).getId()+" - "+clients.get(c).getName());
         }        for(int c = 0;c<phones.size();c++){

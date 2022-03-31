@@ -28,6 +28,7 @@ public class LinhaTelefonicaDAO {
                 id = rs.getInt(1);
             }
             linhaTelefonicaVO.setId(id);
+            turnActive(linhaTelefonicaVO.getIdtelefone());
         } catch (SQLException e) {
             System.out.println("Erro ao executar a query de cadastrar linha telefonica.");
             System.out.println("Erro: " + e.getMessage());
@@ -36,7 +37,7 @@ public class LinhaTelefonicaDAO {
             // Banco.closeStatement(stmt);
             Banco.closePreparedStatement(pstm);
             Banco.closeConnection(conn);
-            System.out.println("Linha telefonica cadastrado cadastrado!");
+            System.out.println("Linha telefonica cadastrado!");
             return linhaTelefonicaVO;
         }
     }
@@ -53,6 +54,7 @@ public class LinhaTelefonicaDAO {
             if (stmt.executeUpdate(query) == 1) {
                 retorno = true;
             }
+
         } catch (SQLException e) {
             System.out.println("Erro ao executar a query de atualização da linha telefonica.");
             System.out.println("Erro: " + e.getMessage());
@@ -126,6 +128,25 @@ public class LinhaTelefonicaDAO {
         }
 
         return telefoneVOlist;
+    }
+
+    public boolean turnActive(Integer idPhone){
+        Connection conn = Banco.getConnection();
+        Statement stmt = Banco.getStatement(conn);
+        boolean retorno = false;
+        String query = "UPDATE TELEFONE set ATIVO = True where idtelefone="+idPhone;
+        try {
+            if (stmt.executeUpdate(query) == 1) {
+                retorno = true;
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao executar a query de ativação da linha telefonica.");
+            System.out.println("Erro: " + e.getMessage());
+        } finally {
+            Banco.closeStatement(stmt);
+            Banco.closeConnection(conn);
+        }
+        return true;
     }
 
 }
