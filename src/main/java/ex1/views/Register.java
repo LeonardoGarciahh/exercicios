@@ -81,6 +81,8 @@ public class Register extends JFrame {
 
                ClienteController clienteController = new ClienteController();
                try {
+                   int id = Integer.parseInt(comboBox2.getSelectedItem().toString().split(",")[0].replace("id: ",""));
+                   address.setId(id);
                    address = addressController.addAdress(address);
                    ClienteVO client = new ClienteVO(nameField.getText(), cpfField.getText(), address);
                    clienteController.addClient(client);
@@ -105,6 +107,7 @@ public class Register extends JFrame {
                 int id = Integer.parseInt(comboBox2.getSelectedItem().toString().split(",")[0].replace("id: ",""));
                 try {
                     AddressVO address = addressController.findAddress(id);
+
                     ruaField.setText(address.getStreet());
                     estadoField.setText(address.getState());
                     cepField.setText(address.getCep());

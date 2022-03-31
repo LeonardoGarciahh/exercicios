@@ -9,7 +9,16 @@ import java.util.ArrayList;
 public class AddressBO {
     public AddressVO addAdress(AddressVO adressvo) throws SQLException {
         AddressDAO adressDAO = new AddressDAO();
-        return adressDAO.addAdress(adressvo);
+        System.out.println(adressvo.getId());
+        AddressVO adressActual = findAddress(adressvo.getId());
+        if(adressActual.getNumero() == adressvo.getNumero() && adressActual.getUf() == adressvo.getUf() &&
+        adressActual.getState() == adressvo.getState() && adressActual.getCep() == adressvo.getCep() &&
+        adressActual.getStreet() == adressvo.getStreet() && adressActual.getCidade() == adressvo.getCidade()
+        ){
+            return adressActual;
+        }else {
+            return adressDAO.addAdress(adressvo);
+        }
     }
 
     public Boolean deletAdress(AddressVO adressvo) throws SQLException {
