@@ -126,8 +126,8 @@ public class PhoneDAO {
         ArrayList<PhoneVO> telefoneVOlist = new ArrayList<PhoneVO>();
 
         Boolean resp = false;
-        System.out.println(phoneVO.getId());
-        if(phoneVO.getId()) {
+        System.out.println(phoneVO);
+        if(phoneVO != null) {
             query = "SELECT * FROM TELEFONE WHERE IDTELEFONE = " + phoneVO.getId();
 
 
