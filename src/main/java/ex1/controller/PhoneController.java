@@ -28,14 +28,26 @@ public class PhoneController {
         return phoneBO.updatePhone(phoneVO);
     }
 
+    public ArrayList<PhoneVO> findAllPhone() throws SQLException {
+        PhoneBO phoneBO = new PhoneBO();
+        return phoneBO.findAllPhone();
+    }
+
     public PhoneVO findPhone(Integer id) throws SQLException {
         PhoneBO phoneBO = new PhoneBO();
         return phoneBO.findPhone(id);
     }
 
-    public ArrayList<PhoneVO> findPhoneNotActive() throws SQLException {
+    public Boolean checkIfActive(PhoneVO phoneVO) throws SQLException {
         PhoneBO phoneBO = new PhoneBO();
-        return phoneBO.findPhoneNotActive();
+        return phoneBO.checkIfActive(phoneVO);
     }
+
+    public Boolean turnOffPhone(Integer idtelefone) throws SQLException {
+        PhoneBO phoneBO = new PhoneBO();
+        return phoneBO.turnOffPhone(idtelefone);
+    }
+
+
 }
 

@@ -1,6 +1,7 @@
 package ex1.model.dao;
 
 import ex1.controller.AddressController;
+import ex1.controller.LinhaTelefonicaController;
 import ex1.model.vo.AddressVO;
 import ex1.model.vo.ClienteVO;
 import ex1.model.vo.PhoneVO;
@@ -117,15 +118,52 @@ public class PhoneDAO {
         return phoneVO;
     }
 
-    public ArrayList<PhoneVO> findPhoneNotActive(){
+    public Boolean checkIfActive(PhoneVO phoneVO){
         Connection conn = Banco.getConnection();
         Statement stmt = Banco.getStatement(conn);
         ResultSet resultado = null;
         String query;
         ArrayList<PhoneVO> telefoneVOlist = new ArrayList<PhoneVO>();
 
+        Boolean resp = false;
+        System.out.println(phoneVO.getId());
+        if(phoneVO.getId()) {
+            query = "SELECT * FROM TELEFONE WHERE IDTELEFONE = " + phoneVO.getId();
 
-        query = "SELECT * FROM TELEFONE WHERE ATIVO = 0";
+
+            try {
+                resultado = stmt.executeQuery(query);
+                if (resultado.next()) {
+
+                    if (resultado.getBoolean(6) == true) {
+                        resp = true;
+                    }
+
+                }
+
+            } catch (SQLException e) {
+                System.out.println("Erro ao executar a query que busca os telefones.");
+                System.out.println("Erro: " + e.getMessage());
+            } finally {
+                Banco.closeResultSet(resultado);
+                Banco.closeStatement(stmt);
+                Banco.closeConnection(conn);
+            }
+        }
+        return resp;
+    }
+
+    public ArrayList<PhoneVO> findAllPhone() {
+        Connection conn = Banco.getConnection();
+        Statement stmt = Banco.getStatement(conn);
+        ResultSet resultado = null;
+        String query;
+        ArrayList<PhoneVO> phoneVOlist = new ArrayList<PhoneVO>();
+
+        AddressController addressController = new AddressController();
+        LinhaTelefonicaController linhaTelefonicaController = new LinhaTelefonicaController();
+
+        query = "SELECT * FROM TELEFONE";
 
 
         try {
@@ -138,11 +176,11 @@ public class PhoneDAO {
                 phoneVO.setNumber(resultado.getString(4));
                 phoneVO.setType(resultado.getInt(5));
                 phoneVO.setActive(resultado.getBoolean(6));
-                telefoneVOlist.add(phoneVO);
+                phoneVOlist.add(phoneVO);
             }
 
         } catch (SQLException e) {
-            System.out.println("Erro ao executar a query que busca os telefones.");
+            System.out.println("Erro ao executar a query que busca todos os telefones.");
             System.out.println("Erro: " + e.getMessage());
         } finally {
             Banco.closeResultSet(resultado);
@@ -150,6 +188,24 @@ public class PhoneDAO {
             Banco.closeConnection(conn);
         }
 
-        return telefoneVOlist;
+        return phoneVOlist;
+    }
+    public boolean turnOffPhone(Integer idPhone){
+        Connection conn = Banco.getConnection();
+        Statement stmt = Banco.getStatement(conn);
+        boolean retorno = false;
+        String query = "UPDATE TELEFONE set ATIVO = False where idtelefone="+idPhone;
+        try {
+            if (stmt.executeUpdate(query) == 1) {
+                retorno = true;
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao executar a query de ativação da linha telefonica.");
+            System.out.println("Erro: " + e.getMessage());
+        } finally {
+            Banco.closeStatement(stmt);
+            Banco.closeConnection(conn);
+        }
+        return true;
     }
 }

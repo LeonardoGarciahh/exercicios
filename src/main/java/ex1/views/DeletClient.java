@@ -27,9 +27,7 @@ public class DeletClient extends JFrame{
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                int id = Integer.parseInt(comboBox1.getSelectedItem().toString().split("-")[0].trim());
-                ClienteVO clienteVO = new ClienteVO();
-                clienteVO.setId(id);
+                ClienteVO clienteVO = (ClienteVO) comboBox1.getSelectedItem();
                 try {
                     boolean deleted = clienteController.deletClient(clienteVO);
                     if(deleted){
@@ -68,7 +66,7 @@ public class DeletClient extends JFrame{
             comboBox1.removeItemAt(0);
         }
         clients.forEach((client)->{
-            comboBox1.addItem(client.getId()+" - "+client.getName());
+            comboBox1.addItem(client);
         });
 
     }

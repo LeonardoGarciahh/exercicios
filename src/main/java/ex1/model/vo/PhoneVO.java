@@ -70,13 +70,6 @@ public class PhoneVO {
 
     @Override
     public String toString() {
-        return "Phone{" +
-                "id='" + id + '\'' +
-                "number='" + number + '\'' +
-                ", ddd=" + ddd +
-                ", ddi=" + ddi +
-                ", type='" + type + '\'' +
-                ", active=" + active +
-                '}';
+        return id +" - "+ ddi + ddd + number+" - "+active;
     }
 }

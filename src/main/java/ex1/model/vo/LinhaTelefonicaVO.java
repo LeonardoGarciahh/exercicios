@@ -15,6 +15,10 @@ public class LinhaTelefonicaVO {
         this.idtelefone = idtelefone;
     }
 
+    public LinhaTelefonicaVO() {
+
+    }
+
     public int getId() {
         return id;
     }

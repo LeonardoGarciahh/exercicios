@@ -37,4 +37,14 @@ public class LinhaTelefonicaController {
         return linhaTelefonicaBO.disableLine(linhaTelefonicaVO);
     }
 
+    public LinhaTelefonicaVO findLine(Integer idtelefone) {
+        LinhaTelefonicaBO linhaTelefonicaBO = new LinhaTelefonicaBO();
+        return linhaTelefonicaBO.findLine(idtelefone);
+    }
+
+    public Boolean turnActive(Integer idPhone){
+        LinhaTelefonicaBO linhaTelefonicaBO = new LinhaTelefonicaBO();
+        return linhaTelefonicaBO.turnActive(idPhone);
+    }
+
 }

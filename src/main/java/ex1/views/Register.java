@@ -26,6 +26,7 @@ public class Register extends JFrame {
     private JTextField ufField;
     private JComboBox comboBox1;
     private JComboBox comboBox2;
+    ArrayList<AddressVO> addressList = new ArrayList<AddressVO>();
 
     public Register() throws SQLException {
         setContentPane(mainPanel);
@@ -61,7 +62,7 @@ public class Register extends JFrame {
             comboBox1.addItem(list.get(c));
         }
                 AddressController addressController = new AddressController();
-        ArrayList<AddressVO> addressList = new ArrayList<AddressVO>();
+
         addressList = addressController.findAllAddress();
         for(int c = 0;c<addressList.size();c++){
             comboBox2.addItem(addressList.get(c));
@@ -81,7 +82,10 @@ public class Register extends JFrame {
 
                ClienteController clienteController = new ClienteController();
                try {
-                   int id = Integer.parseInt(comboBox2.getSelectedItem().toString().split(",")[0].replace("id: ",""));
+                   int id = 0;
+                   if(addressList.size() != 0) {
+                        id = Integer.parseInt(comboBox2.getSelectedItem().toString().split(",")[0].replace("id: ", ""));
+                   }
                    address.setId(id);
                    address = addressController.addAdress(address);
                    ClienteVO client = new ClienteVO(nameField.getText(), cpfField.getText(), address);

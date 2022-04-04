@@ -84,14 +84,21 @@ public class LinhaTelefonicaDAO {
         return retorno;
     }
 
+
     public boolean disableLine(LinhaTelefonicaVO linhaTelefonicaVO){
         Connection conn = Banco.getConnection();
         Statement stmt = Banco.getStatement(conn);
         boolean retorno = false;
-        String query = "DELETE FROM LINHA_TELEFONICA WHERE IDLINHATELEFONICA = " + linhaTelefonicaVO.getId();
+        System.out.println(linhaTelefonicaVO.getId());
+        String query = "UPDATE LINHA_TELEFONICA set DT_DESATIVACAO = now() where IDLINHATELEFONICA="+linhaTelefonicaVO.getId();
         try {
-            linhaTelefonicaVO.setDt_Desativacao(LocalDate.now());
-            updateLine(linhaTelefonicaVO);
+            if (stmt.executeUpdate(query) == 1) {
+                retorno = true;
+            }
+            PhoneController phoneController = new PhoneController();
+        } catch (SQLException e) {
+            System.out.println("Erro ao executar a query de ativação da linha telefonica.");
+            System.out.println("Erro: " + e.getMessage());
         } finally {
             Banco.closeStatement(stmt);
             Banco.closeConnection(conn);
@@ -128,6 +135,37 @@ public class LinhaTelefonicaDAO {
         }
 
         return telefoneVOlist;
+    }
+
+    public LinhaTelefonicaVO findLine(Integer idtelefone){
+        Connection conn = Banco.getConnection();
+        Statement stmt = Banco.getStatement(conn);
+        ResultSet resultado = null;
+        String query;
+
+        query = "SELECT * FROM LINHA_TELEFONICA WHERE IDTELEFONE = " + idtelefone+" and DT_DESATIVACAO IS NULL";
+        PhoneController phoneController = new PhoneController();
+
+                LinhaTelefonicaVO linhaTelefonicaVO = new LinhaTelefonicaVO();
+        try {
+            resultado = stmt.executeQuery(query);
+            if (resultado.next()) {
+                linhaTelefonicaVO.setId(resultado.getInt(1));
+                linhaTelefonicaVO.setIdcliente(resultado.getInt(4));
+                linhaTelefonicaVO.setIdtelefone(resultado.getInt(5));
+
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao executar a query que busca a linha.");
+            System.out.println("Erro: " + e.getMessage());
+        } finally {
+            Banco.closeResultSet(resultado);
+            Banco.closeStatement(stmt);
+            Banco.closeConnection(conn);
+        }
+
+        return linhaTelefonicaVO;
     }
 
     public boolean turnActive(Integer idPhone){

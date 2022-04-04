@@ -1,8 +1,6 @@
 package ex1.model.bo;
 
-import ex1.model.dao.AddressDAO;
 import ex1.model.dao.PhoneDAO;
-import ex1.model.vo.AddressVO;
 import ex1.model.vo.PhoneVO;
 
 import java.sql.SQLException;
@@ -30,8 +28,18 @@ public class PhoneBO {
         return phoneDAO.findPhone(id);
     }
 
-    public ArrayList<PhoneVO> findPhoneNotActive() {
+    public Boolean checkIfActive(PhoneVO phoneVO) {
         PhoneDAO phoneDAO = new PhoneDAO();
-        return phoneDAO.findPhoneNotActive();
+        return phoneDAO.checkIfActive(phoneVO);
+    }
+
+    public ArrayList<PhoneVO> findAllPhone() {
+        PhoneDAO phoneDAO = new PhoneDAO();
+        return phoneDAO.findAllPhone();
+    }
+
+    public Boolean turnOffPhone(Integer idtelefone) {
+        PhoneDAO phoneDAO = new PhoneDAO();
+        return phoneDAO.turnOffPhone(idtelefone);
     }
 }
