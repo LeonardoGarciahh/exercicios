@@ -6,19 +6,19 @@ public class AddressVO {
     private String cep;
     private String state;
     private String uf;
-    private String cidade;
-    private Integer numero;
+    private String city;
+    private Integer number;
 
     public AddressVO() {
 
     }
 
-    public AddressVO(String street, Integer numero, String cep, String uf, String cidade, String state) {
+    public AddressVO(String street, Integer number, String cep, String uf, String city, String state) {
         this.street = street;
         this.cep = cep;
         this.uf = uf;
-        this.cidade = cidade;
-        this.numero = numero;
+        this.city = city;
+        this.number = number;
         this.state = state;
     }
 
@@ -56,12 +56,12 @@ public class AddressVO {
         this.uf = uf;
     }
 
-    public String getCidade() {
-        return cidade;
+    public String getCity() {
+        return city;
     }
 
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public int getId() {
@@ -72,14 +72,14 @@ public class AddressVO {
         this.id = id;
     }
 
-    public Integer getNumero() {
-        return numero;
+    public Integer getNumber() {
+        return number;
     }
 
 
 
-    public void setNumero(Integer numero) {
-        this.numero = numero;
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 
     @Override
@@ -88,6 +88,6 @@ public class AddressVO {
                 ", Rua: '" + street + '\'' +
                 ", Cep: '" + cep + '\'' +
                 ", Uf: '" + uf + '\'' +
-                ", Cidade: '" + cidade;
+                ", Cidade: '" + city;
     }
 }

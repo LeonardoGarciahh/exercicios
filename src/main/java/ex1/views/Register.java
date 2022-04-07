@@ -15,17 +15,17 @@ import java.util.List;
 
 public class Register extends JFrame {
     private JTextField cpfField;
-    private JTextField cidadeField;
+    private JTextField cityField;
     private JPanel mainPanel;
-    private JButton cadastrarButton;
+    private JButton registerButton;
     private JTextField nameField;
-    private JTextField ruaField;
-    private JTextField numeroField;
-    private JTextField estadoField;
+    private JTextField streetField;
+    private JTextField numberField;
+    private JTextField stateField;
     private JTextField cepField;
     private JTextField ufField;
-    private JComboBox comboBox1;
-    private JComboBox comboBox2;
+    private JComboBox stateBox;
+    private JComboBox addresBox;
     ArrayList<AddressVO> addressList = new ArrayList<AddressVO>();
 
     public Register() throws SQLException {
@@ -59,32 +59,33 @@ public class Register extends JFrame {
                 "SE",
                 "TO"));
         for(int c = 0;c < list.size();c++){
-            comboBox1.addItem(list.get(c));
+            stateBox.addItem(list.get(c));
         }
                 AddressController addressController = new AddressController();
 
         addressList = addressController.findAllAddress();
         for(int c = 0;c<addressList.size();c++){
-            comboBox2.addItem(addressList.get(c));
+            addresBox.addItem(addressList.get(c));
         }
 
-        cadastrarButton.addActionListener(e -> {
+        registerButton.addActionListener(e -> {
 
-           if(!cpfField.getText().trim().equals("") && !cidadeField.getText().trim().equals("") &&
-                !nameField.getText().trim().equals("") && !ruaField.getText().trim().equals("") &&
-                !numeroField.getText().trim().equals("") && !estadoField.getText().trim().equals("") &&
+           if(!cpfField.getText().trim().equals("") && !cityField.getText().trim().equals("") &&
+                !nameField.getText().trim().equals("") && !streetField.getText().trim().equals("") &&
+                !numberField.getText().trim().equals("") && !stateField.getText().trim().equals("") &&
                 !cepField.getText().trim().equals("")) {
                if (cpfField.getText().length() == 11) {
 
 
-               AddressVO address = new AddressVO(ruaField.getText(), Integer.parseInt(numeroField.getText()), cepField.getText(), (String) comboBox1.getSelectedItem(),
-                       cidadeField.getText(), estadoField.getText());
+               AddressVO address = new AddressVO(streetField.getText(), Integer.parseInt(numberField.getText()), cepField.getText(), (String) stateBox.getSelectedItem(),
+                       cityField.getText(), stateField.getText());
 
                ClienteController clienteController = new ClienteController();
                try {
                    int id = 0;
                    if(addressList.size() != 0) {
-                        id = Integer.parseInt(comboBox2.getSelectedItem().toString().split(",")[0].replace("id: ", ""));
+                        AddressVO addressVO = (AddressVO) addresBox.getSelectedItem();
+                        id= addressVO.getId();
                    }
                    address.setId(id);
                    address = addressController.addAdress(address);
@@ -104,20 +105,20 @@ public class Register extends JFrame {
             }
         });
 
-        comboBox2.addActionListener(new ActionListener() {
+        addresBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(comboBox2.getSelectedItem().toString().split(",")[0].replace("id: ",""));
-                int id = Integer.parseInt(comboBox2.getSelectedItem().toString().split(",")[0].replace("id: ",""));
+                AddressVO addressVO = (AddressVO) addresBox.getSelectedItem();
+                int id= addressVO.getId();
                 try {
                     AddressVO address = addressController.findAddress(id);
 
-                    ruaField.setText(address.getStreet());
-                    estadoField.setText(address.getState());
+                    streetField.setText(address.getStreet());
+                    stateField.setText(address.getState());
                     cepField.setText(address.getCep());
-                    numeroField.setText(address.getNumero().toString());
-                    cidadeField.setText((address.getCidade()));
-                    comboBox1.setSelectedItem(address.getUf());
+                    numberField.setText(address.getNumber().toString());
+                    cityField.setText((address.getCity()));
+                    stateBox.setSelectedItem(address.getUf());
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }

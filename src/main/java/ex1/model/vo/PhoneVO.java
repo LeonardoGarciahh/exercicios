@@ -70,6 +70,6 @@ public class PhoneVO {
 
     @Override
     public String toString() {
-        return id +" - "+ ddi + ddd + number+" - "+active;
+        return id +" - "+ ddi + ddd + number+" - "+((active)?"Ativo":"Desativado");
     }
 }

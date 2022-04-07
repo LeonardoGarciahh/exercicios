@@ -27,7 +27,7 @@ public class LinhaTelefonicaController {
         return linhaTelefonicaBO.updateClient(linhaTelefonicaVO);
     }
 
-    public ArrayList<PhoneVO> findPhoneByClient(Integer idcliente) throws SQLException {
+    public ArrayList<LinhaTelefonicaVO> findPhoneByClient(Integer idcliente) throws SQLException {
         LinhaTelefonicaBO linhaTelefonicaBO = new LinhaTelefonicaBO();
         return linhaTelefonicaBO.findPhoneByClient(idcliente);
     }

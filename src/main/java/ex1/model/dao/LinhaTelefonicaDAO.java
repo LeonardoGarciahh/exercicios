@@ -7,7 +7,6 @@ import ex1.model.vo.PhoneVO;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class LinhaTelefonicaDAO {
 
@@ -46,8 +45,8 @@ public class LinhaTelefonicaDAO {
         Connection conn = Banco.getConnection();
         Statement stmt = Banco.getStatement(conn);
         boolean retorno = false;
-        String query = "UPDATE LINHA_TELEFONICA set DT_ATIVACAO = '" + linhaTelefonicaVO.getDt_Ativacao() + "', DT_DESATIVACAO = '"
-                + linhaTelefonicaVO.getDt_Desativacao() + "', IDCLIENTE = '" + linhaTelefonicaVO.getIdcliente() +
+        String query = "UPDATE LINHA_TELEFONICA set DT_ATIVACAO = '" + linhaTelefonicaVO.getDT_ACTIVATION() + "', DT_DESATIVACAO = '"
+                + linhaTelefonicaVO.getDT_DESATIVATE() + "', IDCLIENTE = '" + linhaTelefonicaVO.getIdcliente() +
                 "', IDTELEFONE = '" + linhaTelefonicaVO.getIdtelefone() +
                 "'WHERE IDLINHATELEFONICA = " + linhaTelefonicaVO.getId();
         try {
@@ -106,12 +105,12 @@ public class LinhaTelefonicaDAO {
         return retorno;
     }
 
-    public ArrayList<PhoneVO> findPhoneByClient(Integer idcliente){
+    public ArrayList<LinhaTelefonicaVO> findPhoneByClient(Integer idcliente){
         Connection conn = Banco.getConnection();
         Statement stmt = Banco.getStatement(conn);
         ResultSet resultado = null;
         String query;
-        ArrayList<PhoneVO> telefoneVOlist = new ArrayList<PhoneVO>();
+        ArrayList<LinhaTelefonicaVO> telefoneVOlist = new ArrayList<LinhaTelefonicaVO>();
         PhoneVO phoneVO = new PhoneVO();
 
         query = "SELECT * FROM LINHA_TELEFONICA WHERE IDCLIENTE = " + idcliente;
@@ -120,9 +119,14 @@ public class LinhaTelefonicaDAO {
         try {
             resultado = stmt.executeQuery(query);
             while (resultado.next()) {
-                PhoneVO phone = new PhoneVO();
-                phone = phoneController.findPhone(resultado.getInt(5));
-                telefoneVOlist.add(phone);
+                LinhaTelefonicaVO linhaTelefonicaVO = new LinhaTelefonicaVO();
+                linhaTelefonicaVO.setId(resultado.getInt(1));
+                linhaTelefonicaVO.setDT_ACTIVATION(LocalDate.parse((resultado.getString(2))));
+                linhaTelefonicaVO.setDT_DESATIVATE((resultado.getString(3) != null)?LocalDate.parse((resultado.getString(3))):null);
+                linhaTelefonicaVO.setIdcliente(resultado.getInt(4));
+                linhaTelefonicaVO.setIdtelefone(resultado.getInt(5));
+
+                telefoneVOlist.add(linhaTelefonicaVO);
             }
 
         } catch (SQLException e) {

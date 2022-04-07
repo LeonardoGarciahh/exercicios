@@ -6,6 +6,7 @@ import ex1.model.dao.ClientDAO;
 import ex1.model.dao.PhoneDAO;
 import ex1.model.vo.AddressVO;
 import ex1.model.vo.ClienteVO;
+import ex1.model.vo.LinhaTelefonicaVO;
 import ex1.model.vo.PhoneVO;
 
 import javax.swing.*;
@@ -27,8 +28,8 @@ public class ClienteBO {
     public Boolean deletClient(ClienteVO clienteVO) throws SQLException {
         ClientDAO clienteDAO = new ClientDAO();
         LinhaTelefonicaController linhaTelefonicaController = new LinhaTelefonicaController();
-        ArrayList<PhoneVO> phones = linhaTelefonicaController.findPhoneByClient(clienteVO.getId());
-        if(phones.size() == 0) {
+        ArrayList<LinhaTelefonicaVO> linhaTelefonica = linhaTelefonicaController.findPhoneByClient(clienteVO.getId());
+        if(linhaTelefonica.size() == 0) {
             return clienteDAO.deletClient(clienteVO);
         }else{
             return false;

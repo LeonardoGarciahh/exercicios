@@ -1,14 +1,13 @@
 package ex1.model.vo;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class LinhaTelefonicaVO {
     private int id;
     private int idcliente;
     private int idtelefone;
-    private LocalDate Dt_Ativacao;
-    private LocalDate Dt_Desativacao;
+    private LocalDate DT_ACTIVATION;
+    private LocalDate DT_DESATIVATE;
 
     public LinhaTelefonicaVO(int idcliente, int idtelefone) {
         this.idcliente = idcliente;
@@ -43,19 +42,19 @@ public class LinhaTelefonicaVO {
         this.idtelefone = idtelefone;
     }
 
-    public LocalDate getDt_Ativacao() {
-        return Dt_Ativacao;
+    public LocalDate getDT_ACTIVATION() {
+        return DT_ACTIVATION;
     }
 
-    public void setDt_Ativacao(LocalDate dt_Ativacao) {
-        Dt_Ativacao = dt_Ativacao;
+    public void setDT_ACTIVATION(LocalDate DT_ACTIVATION) {
+        this.DT_ACTIVATION = DT_ACTIVATION;
     }
 
-    public LocalDate getDt_Desativacao() {
-        return Dt_Desativacao;
+    public LocalDate getDT_DESATIVATE() {
+        return DT_DESATIVATE;
     }
 
-    public void setDt_Desativacao(LocalDate dt_Desativacao) {
-        Dt_Desativacao = dt_Desativacao;
+    public void setDT_DESATIVATE(LocalDate DT_DESATIVATE) {
+        this.DT_DESATIVATE = DT_DESATIVATE;
     }
 }

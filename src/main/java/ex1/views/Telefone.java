@@ -1,30 +1,26 @@
 package ex1.views;
 
-import ex1.controller.ClienteController;
-import ex1.controller.LinhaTelefonicaController;
 import ex1.controller.PhoneController;
-import ex1.model.vo.ClienteVO;
-import ex1.model.vo.LinhaTelefonicaVO;
 import ex1.model.vo.PhoneVO;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class Telefone extends JFrame{
     private JTextField ddiField;
     private JPanel panel1;
     private JTextField dddField;
     private JTextField numeroField;
-    private JTextField tipoField;
     private JButton cadastrarButton;
-    private JTextField idclienteField;
+    private JComboBox typeBox;
 
     public Telefone() throws SQLException {
         setContentPane(panel1);
-        setSize(500,150);
+        setSize(500,90);
+        typeBox.addItem("Movel");
+        typeBox.addItem("Fixo");
 //        ArrayList<ClienteVO> clients = new ArrayList<ClienteVO>();
 //        ClienteController clienteController = new ClienteController();
 //        clients = clienteController.findAllClients();
@@ -35,10 +31,10 @@ public class Telefone extends JFrame{
         cadastrarButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(!ddiField.getText().trim().equals("") && !dddField.getText().trim().equals("") &&
-                    !numeroField.getText().trim().equals("") && !tipoField.getText().trim().equals("") ){
+                    !numeroField.getText().trim().equals("")){
 //                    int id = Integer.parseInt(clientesBox.getSelectedItem().toString().split("-")[0].trim());
 
-                    PhoneVO phone = new PhoneVO(numeroField.getText(),Integer.parseInt(dddField.getText()),Integer.parseInt(ddiField.getText()),Integer.parseInt(tipoField.getText()));
+                    PhoneVO phone = new PhoneVO(numeroField.getText(),Integer.parseInt(dddField.getText()),Integer.parseInt(ddiField.getText()),((typeBox.getSelectedItem() == "Movel")?0:1));
                     PhoneController phoneController = new PhoneController();
                     try {
                         phone = phoneController.addPhone(phone);

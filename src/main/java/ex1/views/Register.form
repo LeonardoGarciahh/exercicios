@@ -59,7 +59,7 @@
           <text value="Rua"/>
         </properties>
       </component>
-      <component id="be804" class="javax.swing.JTextField" binding="ruaField">
+      <component id="be804" class="javax.swing.JTextField" binding="streetField">
         <constraints>
           <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -85,7 +85,7 @@
           <text value="Cidade"/>
         </properties>
       </component>
-      <component id="73880" class="javax.swing.JTextField" binding="cidadeField">
+      <component id="73880" class="javax.swing.JTextField" binding="cityField">
         <constraints>
           <grid row="4" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -103,7 +103,7 @@
           <text value="Estado"/>
         </properties>
       </component>
-      <component id="14e3e" class="javax.swing.JTextField" binding="estadoField">
+      <component id="14e3e" class="javax.swing.JTextField" binding="stateField">
         <constraints>
           <grid row="4" column="5" row-span="1" col-span="6" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -111,7 +111,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="3137d" class="javax.swing.JTextField" binding="numeroField">
+      <component id="3137d" class="javax.swing.JTextField" binding="numberField">
         <constraints>
           <grid row="3" column="5" row-span="1" col-span="6" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -149,7 +149,7 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="96e07" class="javax.swing.JButton" binding="cadastrarButton" default-binding="true">
+          <component id="96e07" class="javax.swing.JButton" binding="registerButton" default-binding="true">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -162,7 +162,7 @@
           </component>
         </children>
       </grid>
-      <component id="9d3f7" class="javax.swing.JComboBox" binding="comboBox2" default-binding="true">
+      <component id="9d3f7" class="javax.swing.JComboBox" binding="addresBox" default-binding="true">
         <constraints>
           <grid row="2" column="1" row-span="1" col-span="8" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -188,7 +188,7 @@
           <text value="UF"/>
         </properties>
       </component>
-      <component id="905c4" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">
+      <component id="905c4" class="javax.swing.JComboBox" binding="stateBox" default-binding="true">
         <constraints>
           <grid row="5" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <minimum-size width="100" height="-1"/>

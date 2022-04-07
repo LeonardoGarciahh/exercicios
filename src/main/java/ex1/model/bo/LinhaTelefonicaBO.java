@@ -27,7 +27,7 @@ public class LinhaTelefonicaBO {
         return linhaTelefonicaDAO.updateLine(linhaTelefonicaVO);
     }
 
-    public ArrayList<PhoneVO> findPhoneByClient(Integer idcliente) {
+    public ArrayList<LinhaTelefonicaVO> findPhoneByClient(Integer idcliente) {
         LinhaTelefonicaDAO linhaTelefonicaDAO = new LinhaTelefonicaDAO();
         return linhaTelefonicaDAO.findPhoneByClient(idcliente);
     }

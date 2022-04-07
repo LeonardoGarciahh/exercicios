@@ -14,10 +14,10 @@ public class AddressDAO {
         PreparedStatement pstm = Banco.getPreparedStatementWithPK(conn, query);
         pstm.setString(1, adressVO.getStreet());
         pstm.setString(2, adressVO.getCep());
-        pstm.setString(3, adressVO.getCidade());
+        pstm.setString(3, adressVO.getCity());
         pstm.setString(4,adressVO.getState());
         pstm.setString(5,adressVO.getUf());
-        pstm.setInt(6,adressVO.getNumero());
+        pstm.setInt(6,adressVO.getNumber());
 
         try {
             pstm.execute();
@@ -45,8 +45,8 @@ public class AddressDAO {
         Statement stmt = Banco.getStatement(conn);
         boolean retorno = false;
         String query = "UPDATE ENDERECO set RUA = '" + addressVO.getStreet() + "', CEP = '"
-                + addressVO.getCep() + "', CIDADE = '" + addressVO.getCidade() + "', ESTADO = '" + addressVO.getState()
-                + "', UF = '" + addressVO.getUf() + "', NUMERO = '" + addressVO.getNumero()
+                + addressVO.getCep() + "', CIDADE = '" + addressVO.getCity() + "', ESTADO = '" + addressVO.getState()
+                + "', UF = '" + addressVO.getUf() + "', NUMERO = '" + addressVO.getNumber()
                 + "' WHERE IDENDERECO = " + addressVO.getId();
         try {
             if (stmt.executeUpdate(query) == 1) {
@@ -100,10 +100,10 @@ public class AddressDAO {
                 addressVO.setId(resultado.getInt(1));
                 addressVO.setStreet(resultado.getString(2));
                 addressVO.setCep(resultado.getString(3));
-                addressVO.setCidade(resultado.getString(4));
+                addressVO.setCity(resultado.getString(4));
                 addressVO.setState(resultado.getString(5));
                 addressVO.setUf(resultado.getString(6));
-                addressVO.setNumero(resultado.getInt(7));
+                addressVO.setNumber(resultado.getInt(7));
             }
 
         } catch (SQLException e) {
@@ -137,10 +137,10 @@ public class AddressDAO {
                 addressVO.setId(resultado.getInt(1));
                 addressVO.setStreet(resultado.getString(2));
                 addressVO.setCep(resultado.getString(3));
-                addressVO.setCidade(resultado.getString(4));
+                addressVO.setCity(resultado.getString(4));
                 addressVO.setState(resultado.getString(5));
                 addressVO.setUf(resultado.getString(6));
-                addressVO.setNumero(resultado.getInt(7));
+                addressVO.setNumber(resultado.getInt(7));
                 addressList.add(addressVO);
             }
 

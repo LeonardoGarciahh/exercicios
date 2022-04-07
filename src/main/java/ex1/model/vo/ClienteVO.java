@@ -6,7 +6,7 @@ public class ClienteVO {
     private int id;
     private String name;
     private String cpf;
-    private ArrayList<PhoneVO> phoneVOS;
+    private ArrayList<LinhaTelefonicaVO> LinhaTelefonicaVO;
     private AddressVO addressVO;
 
     public ClienteVO() {
@@ -16,7 +16,7 @@ public class ClienteVO {
     public ClienteVO(String name, String cpf, AddressVO addressVO) {
         this.name = name;
         this.cpf = cpf;
-        this.phoneVOS = phoneVOS;
+        this.LinhaTelefonicaVO = LinhaTelefonicaVO;
         this.addressVO = addressVO;
     }
 
@@ -36,12 +36,12 @@ public class ClienteVO {
         this.cpf = cpf;
     }
 
-    public ArrayList<PhoneVO> getPhones() {
-        return phoneVOS;
+    public ArrayList<LinhaTelefonicaVO> getPhones() {
+        return LinhaTelefonicaVO;
     }
 
-    public void setPhones(ArrayList<PhoneVO> phoneVOS) {
-        this.phoneVOS = phoneVOS;
+    public void setPhones(ArrayList<LinhaTelefonicaVO> phoneVOS) {
+        this.LinhaTelefonicaVO = phoneVOS;
     }
 
     public AddressVO getAdress() {

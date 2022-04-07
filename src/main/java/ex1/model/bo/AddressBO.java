@@ -5,15 +5,16 @@ import ex1.model.vo.AddressVO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class AddressBO {
     public AddressVO addAdress(AddressVO adressvo) throws SQLException {
         AddressDAO adressDAO = new AddressDAO();
         System.out.println(adressvo.getId());
         AddressVO adressActual = findAddress(adressvo.getId());
-        if(adressActual.getNumero() == adressvo.getNumero() && adressActual.getUf() == adressvo.getUf() &&
-        adressActual.getState() == adressvo.getState() && adressActual.getCep() == adressvo.getCep() &&
-        adressActual.getStreet() == adressvo.getStreet() && adressActual.getCidade() == adressvo.getCidade()
+        if(Objects.equals(adressActual.getNumber(), adressvo.getNumber()) && adressActual.getUf().equals(adressvo.getUf()) &&
+        adressActual.getState().equals(adressvo.getState()) && adressActual.getCep().equals(adressvo.getCep()) &&
+        adressActual.getStreet().equals(adressvo.getStreet()) && adressActual.getCity().equals(adressvo.getCity())
         ){
             return adressActual;
         }else {
