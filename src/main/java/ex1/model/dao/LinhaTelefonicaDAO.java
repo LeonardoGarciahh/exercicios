@@ -113,7 +113,7 @@ public class LinhaTelefonicaDAO {
         ArrayList<LinhaTelefonicaVO> telefoneVOlist = new ArrayList<LinhaTelefonicaVO>();
         PhoneVO phoneVO = new PhoneVO();
 
-        query = "SELECT * FROM LINHA_TELEFONICA WHERE IDCLIENTE = " + idcliente;
+        query = "SELECT * FROM LINHA_TELEFONICA WHERE IDCLIENTE = " + idcliente+" and DT_DESATIVACAO IS NULL";
         PhoneController phoneController = new PhoneController();
 
         try {
