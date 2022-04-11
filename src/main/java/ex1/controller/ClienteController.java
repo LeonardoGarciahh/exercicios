@@ -1,5 +1,6 @@
 package ex1.controller;
 
+import com.mysql.cj.xdevapi.Client;
 import ex1.model.bo.AddressBO;
 import ex1.model.bo.ClienteBO;
 import ex1.model.vo.AddressVO;
@@ -30,7 +31,7 @@ public class ClienteController {
         return clienteBO.findClient(id);
     }
 
-    public Boolean findClientByCpf(String cpf) throws SQLException {
+    public ClienteVO findClientByCpf(String cpf) throws SQLException {
         ClienteBO clienteBO = new ClienteBO();
         return clienteBO.findClientByCpf(cpf);
     }

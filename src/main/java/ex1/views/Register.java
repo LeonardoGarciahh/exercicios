@@ -8,6 +8,8 @@ import ex1.model.vo.ClienteVO;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -124,6 +126,31 @@ public class Register extends JFrame {
                 }
             }
         });
+        cpfField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                super.focusLost(e);
+                ClienteController clienteController = new ClienteController();
+                try {
+                    if(!cpfField.getText().equals("")) {
+
+                        ClienteVO client = clienteController.findClientByCpf(cpfField.getText());
+                        if(client.getId() != 0) {
+                            nameField.setText(client.getName());
+                            for (int c = 0; c < addressList.size(); c++) {
+                                if (addressList.get(c).getId() == client.getAdress().getId()) {
+                                    addresBox.setSelectedItem(addressList.get(c));
+                                }
+                            }
+                        }else{
+                            clearAddressInput();
+                        }
+                    }
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
     }
 
     public static void showScreen() throws SQLException {
@@ -134,5 +161,13 @@ public class Register extends JFrame {
 //        register.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         register.setVisible(true);
 
+    }
+    public void clearAddressInput(){
+        streetField.setText("");
+        cityField.setText("");
+        cepField.setText("");
+        numberField.setText("");
+        stateField.setText("");
+        nameField.setText("");
     }
 }

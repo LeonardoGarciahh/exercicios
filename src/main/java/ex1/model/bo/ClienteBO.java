@@ -17,7 +17,7 @@ public class ClienteBO {
 
     public ClienteVO addClient(ClienteVO clienteVO) throws SQLException {
         ClientDAO clienteDAO = new ClientDAO();
-        if(!findClientByCpf(clienteVO.getCpf())) {
+        if(findClientByCpf(clienteVO.getCpf()).getId() == 0) {
             return clienteDAO.addClient(clienteVO);
         }else{
             JOptionPane.showMessageDialog(null,"CPF ja existente!");
@@ -46,7 +46,7 @@ public class ClienteBO {
         return clienteDAO.findClient(id);
     }
 
-    public Boolean findClientByCpf(String cpf) {
+    public ClienteVO findClientByCpf(String cpf) {
         ClientDAO clienteDAO = new ClientDAO();
         return clienteDAO.findClientByCpf(cpf);
     }

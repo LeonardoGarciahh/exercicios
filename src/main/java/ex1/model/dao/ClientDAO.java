@@ -156,14 +156,14 @@ public class ClientDAO {
         return clienteVO;
     }
 
-    public boolean findClientByCpf(String cpf) {
+    public ClienteVO findClientByCpf(String cpf) {
         Connection conn = Banco.getConnection();
         Statement stmt = Banco.getStatement(conn);
         ResultSet resultado = null;
         String query;
-        boolean result = false;
 
         ClienteVO clienteVO = new ClienteVO();
+        clienteVO.setId(0);
         AddressController addressController = new AddressController();
         LinhaTelefonicaController linhaTelefonicaController = new LinhaTelefonicaController();
         if (cpf != "") {
@@ -179,7 +179,6 @@ public class ClientDAO {
                 clienteVO.setAdress(addressController.findAddress(resultado.getInt(2)));
                 clienteVO.setName(resultado.getString(3));
                 clienteVO.setCpf(resultado.getString(4));
-                result = true;
             }
 
         } catch (SQLException e) {
@@ -191,6 +190,6 @@ public class ClientDAO {
             Banco.closeConnection(conn);
         }
 
-        return result;
+        return clienteVO;
     }
 }
