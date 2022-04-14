@@ -92,7 +92,9 @@ public class Register extends JFrame {
                    address.setId(id);
                    address = addressController.addAdress(address);
                    ClienteVO client = new ClienteVO(nameField.getText(), cpfField.getText(), address);
-                   clienteController.addClient(client);
+                   if(clienteController.addClient(client)){
+                       JOptionPane.showMessageDialog(null,"Salvo com sucesso!");
+                   };
                } catch (SQLException ex) {
                    ex.printStackTrace();
                }

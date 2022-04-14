@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class ClienteController {
 
-    public ClienteVO addClient(ClienteVO clientVO) throws SQLException {
+    public Boolean addClient(ClienteVO clientVO) throws SQLException {
         ClienteBO clienteBO = new ClienteBO();
         return clienteBO.addClient(clientVO);
     }

@@ -15,14 +15,16 @@ import java.util.ArrayList;
 
 public class ClienteBO {
 
-    public ClienteVO addClient(ClienteVO clienteVO) throws SQLException {
+    public Boolean addClient(ClienteVO clienteVO) throws SQLException {
         ClientDAO clienteDAO = new ClientDAO();
-        if(findClientByCpf(clienteVO.getCpf()).getId() == 0) {
-            return clienteDAO.addClient(clienteVO);
+        ClienteVO client = findClientByCpf(clienteVO.getCpf());
+
+        if(client.getId() == 0) {
+            return (clienteDAO.addClient(clienteVO)!=null)?true:false;
         }else{
-            JOptionPane.showMessageDialog(null,"CPF ja existente!");
+            clienteVO.setId(client.getId());
+            return clienteDAO.updateClient(clienteVO);
         }
-        return clienteVO;
     }
 
     public Boolean deletClient(ClienteVO clienteVO) throws SQLException {

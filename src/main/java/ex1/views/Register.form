@@ -129,7 +129,7 @@
               <background color="-14671574"/>
               <font style="1"/>
               <foreground color="-787"/>
-              <text value="Cadastrar"/>
+              <text value="Salvar"/>
             </properties>
           </component>
         </children>

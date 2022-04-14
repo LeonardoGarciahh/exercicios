@@ -11,6 +11,8 @@ public class Menu extends JFrame{
     private JButton deletarClienteButton;
     private JPanel panel;
     private JButton associarTelefoneAoClienteButton;
+    private JButton allClientsBtn;
+    private JButton allPhonesBtn;
     public static Menu menuFrame;
 
     public Menu() {
@@ -55,6 +57,28 @@ public class Menu extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 try {
                     AssociatePhoneAndClient.showScreen();
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+        allClientsBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    ShowAllClients.showScreen();
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+        allPhonesBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    ShowAllPhones.showScreen();
 
                 } catch (Exception ex) {
                     ex.printStackTrace();

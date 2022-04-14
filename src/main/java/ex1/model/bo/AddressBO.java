@@ -10,7 +10,6 @@ import java.util.Objects;
 public class AddressBO {
     public AddressVO addAdress(AddressVO adressvo) throws SQLException {
         AddressDAO adressDAO = new AddressDAO();
-        System.out.println(adressvo.getId());
         AddressVO adressActual = findAddress(adressvo.getId());
         if(Objects.equals(adressActual.getNumber(), adressvo.getNumber()) && adressActual.getUf().equals(adressvo.getUf()) &&
         adressActual.getState().equals(adressvo.getState()) && adressActual.getCep().equals(adressvo.getCep()) &&
@@ -22,12 +21,12 @@ public class AddressBO {
         }
     }
 
-    public Boolean deletAdress(AddressVO adressvo) throws SQLException {
+    public Boolean deletAdress(AddressVO adressvo) {
         AddressDAO adressDAO = new AddressDAO();
         return adressDAO.deletAdress(adressvo);
     }
 
-    public Boolean updateAddress(AddressVO adressvo) throws SQLException {
+    public Boolean updateAddress(AddressVO adressvo) {
         AddressDAO adressDAO = new AddressDAO();
         return adressDAO.updateAddress(adressvo);
     }
