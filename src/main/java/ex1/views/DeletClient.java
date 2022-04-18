@@ -15,13 +15,19 @@ public class DeletClient extends JFrame{
     private JPanel panel;
     private JButton Cancelar;
     public static DeletClient deletClient;
+    ClienteController clienteController = new ClienteController();
+    ArrayList<ClienteVO> clients = clienteController.findAllClients();
 
 
-    public DeletClient() throws SQLException {
+    public DeletClient(ClienteVO client) throws SQLException {
         setContentPane(panel);
         setSize(400,150);
 
-        getAllClients();
+        try {
+            getAllClients();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         ClienteController clienteController = new ClienteController();
         deletarButton.addActionListener(new ActionListener() {
 
@@ -54,12 +60,12 @@ public class DeletClient extends JFrame{
                 deletClient.dispose();
             }
         });
-
+        showScreen(client);
     }
 
     public void getAllClients() throws SQLException {
         ClienteController clienteController = new ClienteController();
-        ArrayList<ClienteVO> clients = clienteController.findAllClients();
+        clients = clienteController.findAllClients();
         int itemCount = comboBox1.getItemCount();
 
         for(int i = 0; i < itemCount; i++){
@@ -71,13 +77,20 @@ public class DeletClient extends JFrame{
 
     }
 
-    public static void showScreen() throws SQLException {
-        deletClient = new DeletClient();
-        deletClient.setResizable(false);
+    public void showScreen(ClienteVO cliente) throws SQLException {
+        this.setResizable(false);
 
-        deletClient.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
+        if(cliente.getId() > 0){
+            for(int c = 0;c<clients.size();c++){
+                if(clients.get(c).getId() == cliente.getId()){
+                    comboBox1.setSelectedItem(clients.get(c));
+                    break;
+                }
+            }
+        }
 //        deletClient.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        deletClient.setVisible(true);
+        this.setVisible(true);
     }
 }
 

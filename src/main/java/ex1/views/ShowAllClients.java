@@ -4,7 +4,11 @@ import ex1.controller.ClienteController;
 import ex1.model.vo.ClienteVO;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -12,6 +16,9 @@ import java.util.ArrayList;
 public class ShowAllClients extends JFrame{
     private JTable table1;
     private JPanel panel1;
+    private JButton deleteBtn;
+    private JButton editBtn;
+    private JButton updateBtn;
     ClienteController clienteController = new ClienteController();
     ArrayList<ClienteVO> clients = clienteController.findAllClients();
     public ShowAllClients() throws SQLException {
@@ -24,8 +31,55 @@ public class ShowAllClients extends JFrame{
         for (ClienteVO cliente: clients) {
             tableModel.addRow(new Object[]{(cliente.getId()), (cliente.getName()), (cliente.getCpf())});
         }
+        editBtn.setEnabled(false);
+        deleteBtn.setEnabled(false);
+        table1.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+            public void valueChanged(ListSelectionEvent event) {
+                // do some actions here, for example
+                // print first column value from selected row
+                if(table1.getSelectedRow() != -1) {
+                    if (((Integer) table1.getValueAt(table1.getSelectedRow(), 0)) > 0) {
+                        editBtn.setEnabled(true);
+                        deleteBtn.setEnabled(true);
+                    }
+                }
+            }
+        });
+        editBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ClienteVO client = new ClienteVO();
+                try {
+                    client.setId((Integer) table1.getValueAt(table1.getSelectedRow(), 0));
+                    Register register = new Register(client);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+        deleteBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ClienteVO client = new ClienteVO();
+                try {
+                    client.setId((Integer) table1.getValueAt(table1.getSelectedRow(), 0));
 
-        table1.setEnabled(false);
+                    DeletClient deletClient = new DeletClient(client);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+        updateBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    updateTable();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
     }
     public static void showScreen() throws SQLException {
         ShowAllClients showAllClients = new ShowAllClients();
@@ -34,5 +88,17 @@ public class ShowAllClients extends JFrame{
         showAllClients.setLocationRelativeTo(null);
         showAllClients.setVisible(true);
 
+    }
+
+    public void updateTable() throws SQLException {
+        clients = clienteController.findAllClients();
+        DefaultTableModel tableModel = new DefaultTableModel(new String[]{"ID", "Nome", "CPF"}, 0);
+        table1.setModel(tableModel);
+        tableModel.addRow(new Object[]{"ID", "Nome", "CPF"});
+
+
+        for (ClienteVO cliente: clients) {
+            tableModel.addRow(new Object[]{(cliente.getId()), (cliente.getName()), (cliente.getCpf())});
+        }
     }
 }

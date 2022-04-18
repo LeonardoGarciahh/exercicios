@@ -27,43 +27,20 @@ public class Register extends JFrame {
     private JTextField cepField;
     private JTextField ufField;
     private JComboBox stateBox;
-    private JComboBox addresBox;
-    ArrayList<AddressVO> addressList = new ArrayList<AddressVO>();
+    public JComboBox addresBox;
+    private ArrayList<AddressVO> addressList = new ArrayList<AddressVO>();
 
-    public Register() throws SQLException {
+
+    public Register(ClienteVO client) throws SQLException {
         setContentPane(mainPanel);
         setSize(600,250);
         List<String> list = new ArrayList<>(Arrays.asList("AC",
-                "AL",
-                "AP",
-                "AM",
-                "BA",
-                "CE",
-                "DF",
-                "ES",
-                "GO",
-                "MA",
-                "MT",
-                "MS",
-                "MG",
-                "PA",
-                "PB",
-                "PR",
-                "PE",
-                "PI",
-                "RJ",
-                "RN",
-                "RS",
-                "RO",
-                "RR",
-                "SC",
-                "SP",
-                "SE",
-                "TO"));
+                "AL", "AP", "AM", "BA", "CE", "DF",
+                "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RO", "RR", "SC", "SP", "SE","TO"));
         for(int c = 0;c < list.size();c++){
             stateBox.addItem(list.get(c));
         }
-                AddressController addressController = new AddressController();
+        AddressController addressController = new AddressController();
 
         addressList = addressController.findAllAddress();
         for(int c = 0;c<addressList.size();c++){
@@ -91,8 +68,8 @@ public class Register extends JFrame {
                    }
                    address.setId(id);
                    address = addressController.addAdress(address);
-                   ClienteVO client = new ClienteVO(nameField.getText(), cpfField.getText(), address);
-                   if(clienteController.addClient(client)){
+                   ClienteVO cliente = new ClienteVO(nameField.getText(), cpfField.getText(), address);
+                   if(clienteController.addClient(cliente)){
                        JOptionPane.showMessageDialog(null,"Salvo com sucesso!");
                    };
                } catch (SQLException ex) {
@@ -144,6 +121,13 @@ public class Register extends JFrame {
                                     addresBox.setSelectedItem(addressList.get(c));
                                 }
                             }
+                            AddressVO address = client.getAdress();
+                            streetField.setText(address.getStreet());
+                            stateField.setText(address.getState());
+                            cepField.setText(address.getCep());
+                            numberField.setText(address.getNumber().toString());
+                            cityField.setText((address.getCity()));
+                            stateBox.setSelectedItem(address.getUf());
                         }else{
                             clearAddressInput();
                         }
@@ -153,17 +137,44 @@ public class Register extends JFrame {
                 }
             }
         });
+
+        showScreen(client);
     }
 
-    public static void showScreen() throws SQLException {
-        Register register = new Register();
-        register.setResizable(false);
-
-        register.setLocationRelativeTo(null);
+    public void showScreen(ClienteVO client) throws SQLException {
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+        if(client.getId() >0) {
+            setClient(client);
+        }
 //        register.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        register.setVisible(true);
+        this.setVisible(true);
 
     }
+
+
+
+    public void setClient(ClienteVO client) throws SQLException {
+        ClienteController clienteController = new ClienteController();
+        client = clienteController.findClient(client.getId());
+
+            cpfField.setText(client.getCpf());
+            nameField.setText(client.getName());
+            for (int c = 0; c < addressList.size(); c++) {
+                if (addressList.get(c).getId() == client.getAdress().getId()) {
+                    addresBox.setSelectedItem(addressList.get(c));
+                }
+            }
+            AddressVO address = client.getAdress();
+            streetField.setText(address.getStreet());
+            stateField.setText(address.getState());
+            cepField.setText(address.getCep());
+            numberField.setText(address.getNumber().toString());
+            cityField.setText((address.getCity()));
+            stateBox.setSelectedItem(address.getUf());
+        }
+
+
     public void clearAddressInput(){
         streetField.setText("");
         cityField.setText("");
@@ -172,4 +183,6 @@ public class Register extends JFrame {
         stateField.setText("");
         nameField.setText("");
     }
+
+
 }

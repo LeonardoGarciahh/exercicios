@@ -1,5 +1,7 @@
 package ex1.views;
 
+import ex1.model.vo.ClienteVO;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,7 +10,6 @@ import java.sql.SQLException;
 public class Menu extends JFrame{
     private JButton clienteButton;
     private JButton telefoneButton;
-    private JButton deletarClienteButton;
     private JPanel panel;
     private JButton associarTelefoneAoClienteButton;
     private JButton allClientsBtn;
@@ -24,7 +25,8 @@ public class Menu extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    Register.showScreen();
+                    ClienteVO client = new ClienteVO();
+                   Register register = new Register(client);
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
@@ -41,17 +43,7 @@ public class Menu extends JFrame{
                 }
             }
         });
-        deletarClienteButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    DeletClient.showScreen();
 
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-        });
         associarTelefoneAoClienteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
