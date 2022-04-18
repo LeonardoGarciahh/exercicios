@@ -27,6 +27,7 @@ public class ShowAllClients extends JFrame{
         setSize(600,250);
         DefaultTableModel tableModel = new DefaultTableModel(new String[]{"ID", "Nome", "CPF"}, 0);
         table1.setModel(tableModel);
+        table1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tableModel.addRow(new Object[]{"ID", "Nome", "CPF"});
         for (ClienteVO cliente: clients) {
             tableModel.addRow(new Object[]{(cliente.getId()), (cliente.getName()), (cliente.getCpf())});
@@ -38,9 +39,14 @@ public class ShowAllClients extends JFrame{
                 // do some actions here, for example
                 // print first column value from selected row
                 if(table1.getSelectedRow() != -1) {
-                    if (((Integer) table1.getValueAt(table1.getSelectedRow(), 0)) > 0) {
-                        editBtn.setEnabled(true);
-                        deleteBtn.setEnabled(true);
+                    try {
+                        if (((Integer) table1.getValueAt(table1.getSelectedRow(), 0)) > 0) {
+                            editBtn.setEnabled(true);
+                            deleteBtn.setEnabled(true);
+                        }
+                    }catch(Exception e){
+                        deleteBtn.setEnabled(false);
+                        editBtn.setEnabled(false);
                     }
                 }
             }
@@ -95,6 +101,9 @@ public class ShowAllClients extends JFrame{
         DefaultTableModel tableModel = new DefaultTableModel(new String[]{"ID", "Nome", "CPF"}, 0);
         table1.setModel(tableModel);
         tableModel.addRow(new Object[]{"ID", "Nome", "CPF"});
+        table1.clearSelection();
+        deleteBtn.setEnabled(false);
+        editBtn.setEnabled(false);
 
 
         for (ClienteVO cliente: clients) {
