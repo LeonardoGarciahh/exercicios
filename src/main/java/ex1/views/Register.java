@@ -70,7 +70,9 @@ public class Register extends JFrame {
                    address = addressController.addAdress(address);
                    ClienteVO cliente = new ClienteVO(nameField.getText(), cpfField.getText(), address);
                    if(clienteController.addClient(cliente)){
+
                        JOptionPane.showMessageDialog(null,"Salvo com sucesso!");
+                       this.dispose();
                    };
                } catch (SQLException ex) {
                    ex.printStackTrace();

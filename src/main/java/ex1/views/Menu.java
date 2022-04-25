@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 public class Menu extends JFrame{
-    private JButton clienteButton;
     private JButton telefoneButton;
     private JPanel panel;
     private JButton associarTelefoneAoClienteButton;
@@ -21,17 +20,7 @@ public class Menu extends JFrame{
         setSize(400,150);
 
 
-        clienteButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    ClienteVO client = new ClienteVO();
-                   Register register = new Register(client);
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
-            }
-        });
+
         telefoneButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -1,0 +1,18 @@
+
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Éæñäüÿÿÿÿ
+L
+java:S1948"1Make "phoneController" transient or serializable.(şßîıÿÿÿÿ
+C
+java:S1948"(Make "phones" transient or serializable.(„Î­åûÿÿÿÿ
+V	java:S125"<This block of commented-out lines of code should be removed.(ØÊçÛûÿÿÿÿ
+R
+java:S1128"=Remove this unused import 'ex1.controller.ClienteController'.(ïÇúA
+N
+java:S1128"3Remove this unused import 'ex1.model.vo.ClienteVO'.(‚âíøÿÿÿÿÿ
+M
+java:S1128
+"7Remove this unused import 'java.awt.event.ActionEvent'.(Úù“‘
+P
+java:S1128":Remove this unused import 'java.awt.event.ActionListener'.(Ìä¹
+A
+java:S1068"+Remove this unused "button1" private field.(İ¢ÈÒ

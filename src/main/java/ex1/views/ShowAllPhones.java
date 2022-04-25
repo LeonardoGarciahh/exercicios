@@ -15,7 +15,6 @@ import java.util.ArrayList;
 public class ShowAllPhones extends JFrame {
     private JTable table1;
     private JPanel panel1;
-    private JButton button1;
     PhoneController phoneController = new PhoneController();
     ArrayList<PhoneVO> phones = phoneController.findAllPhone();
     public ShowAllPhones() throws SQLException {

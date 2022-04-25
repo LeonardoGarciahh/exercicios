@@ -19,6 +19,7 @@ public class ShowAllClients extends JFrame{
     private JButton deleteBtn;
     private JButton editBtn;
     private JButton updateBtn;
+    private JButton clienteButton;
     ClienteController clienteController = new ClienteController();
     ArrayList<ClienteVO> clients = clienteController.findAllClients();
     public ShowAllClients() throws SQLException {
@@ -26,6 +27,7 @@ public class ShowAllClients extends JFrame{
         setContentPane(panel1);
         setSize(600,250);
         DefaultTableModel tableModel = new DefaultTableModel(new String[]{"ID", "Nome", "CPF"}, 0);
+        table1.setDefaultEditor(Object.class, null);
         table1.setModel(tableModel);
         table1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tableModel.addRow(new Object[]{"ID", "Nome", "CPF"});
@@ -81,6 +83,17 @@ public class ShowAllClients extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 try {
                     updateTable();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+        clienteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    ClienteVO client = new ClienteVO();
+                    Register register = new Register(client);
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
