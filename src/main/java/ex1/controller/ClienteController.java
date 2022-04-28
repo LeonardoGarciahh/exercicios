@@ -3,6 +3,7 @@ package ex1.controller;
 import com.mysql.cj.xdevapi.Client;
 import ex1.model.bo.AddressBO;
 import ex1.model.bo.ClienteBO;
+import ex1.model.exception.ClientePossuiLinhaTelefonicaException;
 import ex1.model.vo.AddressVO;
 import ex1.model.vo.ClienteVO;
 

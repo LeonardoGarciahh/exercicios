@@ -6,8 +6,6 @@ import ex1.model.vo.AddressVO;
 import ex1.model.vo.ClienteVO;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.sql.SQLException;
@@ -25,10 +23,9 @@ public class Register extends JFrame {
     private JTextField numberField;
     private JTextField stateField;
     private JTextField cepField;
-    private JTextField ufField;
     private JComboBox stateBox;
     public JComboBox addresBox;
-    private ArrayList<AddressVO> addressList = new ArrayList<AddressVO>();
+    private ArrayList<AddressVO> addressList;
 
 
     public Register(ClienteVO client) throws SQLException {
@@ -47,6 +44,7 @@ public class Register extends JFrame {
             addresBox.addItem(addressList.get(c));
         }
 
+
         registerButton.addActionListener(e -> {
 
            if(!cpfField.getText().trim().equals("") && !cityField.getText().trim().equals("") &&
@@ -62,7 +60,7 @@ public class Register extends JFrame {
                ClienteController clienteController = new ClienteController();
                try {
                    int id = 0;
-                   if(addressList.size() != 0) {
+                   if(addressList.isEmpty()) {
                         AddressVO addressVO = (AddressVO) addresBox.getSelectedItem();
                         id= addressVO.getId();
                    }
@@ -73,7 +71,7 @@ public class Register extends JFrame {
 
                        JOptionPane.showMessageDialog(null,"Salvo com sucesso!");
                        this.dispose();
-                   };
+                   }
                } catch (SQLException ex) {
                    ex.printStackTrace();
                }
@@ -88,23 +86,21 @@ public class Register extends JFrame {
             }
         });
 
-        addresBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                AddressVO addressVO = (AddressVO) addresBox.getSelectedItem();
-                int id= addressVO.getId();
-                try {
-                    AddressVO address = addressController.findAddress(id);
+        addresBox.addActionListener(e -> {
+            AddressVO addressVO = (AddressVO) addresBox.getSelectedItem();
+            assert addressVO != null;
+            int id= addressVO.getId();
+            try {
+                AddressVO address = addressController.findAddress(id);
 
-                    streetField.setText(address.getStreet());
-                    stateField.setText(address.getState());
-                    cepField.setText(address.getCep());
-                    numberField.setText(address.getNumber().toString());
-                    cityField.setText((address.getCity()));
-                    stateBox.setSelectedItem(address.getUf());
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
+                streetField.setText(address.getStreet());
+                stateField.setText(address.getState());
+                cepField.setText(address.getCep());
+                numberField.setText(address.getNumber().toString());
+                cityField.setText((address.getCity()));
+                stateBox.setSelectedItem(address.getUf());
+            } catch (SQLException ex) {
+                ex.printStackTrace();
             }
         });
         cpfField.addFocusListener(new FocusAdapter() {
@@ -149,7 +145,6 @@ public class Register extends JFrame {
         if(client.getId() >0) {
             setClient(client);
         }
-//        register.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setVisible(true);
 
     }

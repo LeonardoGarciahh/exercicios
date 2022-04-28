@@ -76,6 +76,7 @@ public class LinhaTelefonicaDAO {
         boolean retorno = false;
         String query = "DELETE FROM LINHA_TELEFONICA WHERE IDLINHATELEFONICA = ?";
         PreparedStatement pstm = Banco.getPreparedStatement(conn, query);
+        assert pstm != null;
         pstm.setInt(1, linhaTelefonicaVO.getId());
         try {
             if (pstm.executeUpdate() == 1) {
@@ -204,6 +205,7 @@ public class LinhaTelefonicaDAO {
         } catch (SQLException e) {
             System.out.println("Erro ao executar a query de ativação da linha telefonica.");
             System.out.println("Erro: " + e.getMessage());
+
         } finally {
             Banco.closeStatement(stmt);
             Banco.closeConnection(conn);

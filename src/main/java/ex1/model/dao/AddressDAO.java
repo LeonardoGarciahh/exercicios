@@ -4,8 +4,13 @@ import ex1.model.vo.AddressVO;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AddressDAO {
+    Logger logger
+            = Logger.getLogger(
+            AddressDAO.class.getName());
     //inserir
     public AddressVO addAdress(AddressVO adressVO) throws SQLException {
         Connection conn = Banco.getConnection();
@@ -27,16 +32,14 @@ public class AddressDAO {
             }
             adressVO.setId(id);
         } catch (SQLException e) {
-            System.out.println("Erro ao executar a query de cadastrar endereço.");
-            System.out.println("Erro: " + e.getMessage());
+            logger.log(Level.INFO, "Erro ao executar a query de cadastrar endereço.");
+            logger.log(Level.INFO, e.getMessage());
             return null;
         } finally {
-            // Banco.closeStatement(stmt);
             Banco.closePreparedStatement(pstm);
             Banco.closeConnection(conn);
-            System.out.println("Endereço cadastrado cadastrado!");
-            return adressVO;
         }
+        return adressVO;
     }
 
     public boolean updateAddress(AddressVO addressVO) throws SQLException {
@@ -57,8 +60,8 @@ public class AddressDAO {
                 retorno = true;
             }
         } catch (SQLException e) {
-            System.out.println("Erro ao executar a query de atualização do endereço.");
-            System.out.println("Erro: " + e.getMessage());
+            logger.log(Level.INFO, "Erro ao executar a query de atualização do endereço.");
+            logger.log(Level.INFO, e.getMessage());
         } finally {
             Banco.closeStatement(stmt);
             Banco.closeConnection(conn);
@@ -78,8 +81,8 @@ public class AddressDAO {
                 retorno = true;
             }
         } catch (SQLException e) {
-            System.out.println("Erro ao executar a query que deleta o endereço.");
-            System.out.println("Erro: " + e.getMessage());
+            logger.log(Level.INFO, "Erro ao executar a query que deleta o endereço.");
+            logger.log(Level.INFO, e.getMessage());
         } finally {
             Banco.closeStatement(stmt);
             Banco.closeConnection(conn);
@@ -113,8 +116,8 @@ public class AddressDAO {
             }
 
         } catch (SQLException e) {
-            System.out.println("Erro ao executar a query que busca os endereços.");
-            System.out.println("Erro: " + e.getMessage());
+            logger.log(Level.INFO, "Erro ao executar a query que busca os endereços.");
+            logger.log(Level.INFO, e.getMessage());
         } finally {
             Banco.closeResultSet(resultado);
             Banco.closeStatement(stmt);
@@ -123,9 +126,8 @@ public class AddressDAO {
 
         return addressVO;
     }
-    //consultar
 
-    //consultar todos
+    // consultar todos
     public ArrayList<AddressVO> findAllAddress() {
         Connection conn = Banco.getConnection();
         Statement stmt = Banco.getStatement(conn);
@@ -151,8 +153,8 @@ public class AddressDAO {
             }
 
         } catch (SQLException e) {
-            System.out.println("Erro ao executar a query que busca os endereços.");
-            System.out.println("Erro: " + e.getMessage());
+            logger.log(Level.INFO, "Erro ao executar a query que busca os endereços.");
+            logger.log(Level.INFO, e.getMessage());
         } finally {
             Banco.closeResultSet(resultado);
             Banco.closeStatement(stmt);

@@ -2,17 +2,20 @@ package ex1.model.dao;
 
 import ex1.controller.AddressController;
 import ex1.controller.LinhaTelefonicaController;
-import ex1.model.vo.AddressVO;
+import ex1.model.exception.ClientePossuiLinhaTelefonicaException;
 import ex1.model.vo.ClienteVO;
-import ex1.model.vo.PhoneVO;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ClientDAO {
+    Logger logger
+            = Logger.getLogger(
+            AddressDAO.class.getName());
     public ClienteVO addClient(ClienteVO clienteVO) throws SQLException {
         Connection conn = Banco.getConnection();
-        // Statement stmt = Banco.getStatement(conn);
         String query = "INSERT INTO CLIENTE (IDENDERECO,NOME,CPF) VALUES(?,?,?)";
         PreparedStatement pstm = Banco.getPreparedStatementWithPK(conn, query);
         pstm.setInt(1, clienteVO.getAdress().getId());
@@ -27,18 +30,15 @@ public class ClientDAO {
                 id = rs.getInt(1);
             }
             clienteVO.setId(id);
-            System.out.println(clienteVO.toString());
         } catch (SQLException e) {
-            System.out.println("Erro ao executar a query de cadastrar cliente.");
-            System.out.println("Erro: " + e.getMessage());
+            logger.log(Level.INFO, "Erro ao executar a query de cadastrar cliente.");
+            logger.log(Level.INFO, e.getMessage());
             return null;
         } finally {
-            // Banco.closeStatement(stmt);
             Banco.closePreparedStatement(pstm);
             Banco.closeConnection(conn);
-            System.out.println("Cliente cadastrado cadastrado!");
-            return clienteVO;
         }
+        return clienteVO;
     }
 
     public boolean updateClient(ClienteVO clienteVO) throws SQLException {
@@ -56,8 +56,8 @@ public class ClientDAO {
                 retorno = true;
             }
         } catch (SQLException e) {
-            System.out.println("Erro ao executar a query de atualização do cliente.");
-            System.out.println("Erro: " + e.getMessage());
+            logger.log(Level.INFO, "Erro ao executar a query de atualização do cliente.");
+            logger.log(Level.INFO, e.getMessage());
         } finally {
             Banco.closeStatement(stmt);
             Banco.closeConnection(conn);
@@ -77,8 +77,8 @@ public class ClientDAO {
                 retorno = true;
             }
         } catch (SQLException e) {
-            System.out.println("Erro ao executar a query que deleta o cliente.");
-            System.out.println("Erro: " + e.getMessage());
+            logger.log(Level.INFO, "Erro ao executar a query que deleta o cliente.");
+            logger.log(Level.INFO, e.getMessage());
         } finally {
             Banco.closeStatement(stmt);
             Banco.closeConnection(conn);
@@ -112,8 +112,8 @@ public class ClientDAO {
             }
 
         } catch (SQLException e) {
-            System.out.println("Erro ao executar a query que busca todos os clientes.");
-            System.out.println("Erro: " + e.getMessage());
+            logger.log(Level.INFO, "Erro ao executar a query que busca todos os clientes.");
+            logger.log(Level.INFO, e.getMessage());
         } finally {
             Banco.closeResultSet(resultado);
             Banco.closeStatement(stmt);
@@ -150,8 +150,8 @@ public class ClientDAO {
             }
 
         } catch (SQLException e) {
-            System.out.println("Erro ao executar a query que busca os clientes.");
-            System.out.println("Erro: " + e.getMessage());
+            logger.log(Level.INFO, "Erro ao executar a query que busca os clientes.");
+            logger.log(Level.INFO, e.getMessage());
         } finally {
             Banco.closeResultSet(resultado);
             Banco.closeStatement(stmt);
@@ -171,7 +171,7 @@ public class ClientDAO {
         clienteVO.setId(0);
         AddressController addressController = new AddressController();
         LinhaTelefonicaController linhaTelefonicaController = new LinhaTelefonicaController();
-        if (cpf != "") {
+        if (!cpf.equals("")) {
             query = "SELECT * FROM CLIENTE WHERE CPF = " + cpf;
         } else {
             query = "SELECT * FROM CLIENTE";
@@ -187,8 +187,8 @@ public class ClientDAO {
             }
 
         } catch (SQLException e) {
-            System.out.println("Erro ao executar a query que busca os clientes pelo cpf.");
-            System.out.println("Erro: " + e.getMessage());
+            logger.log(Level.INFO, "Erro ao executar a query que busca os clientes pelo cpf.");
+            logger.log(Level.INFO, e.getMessage());
         } finally {
             Banco.closeResultSet(resultado);
             Banco.closeStatement(stmt);

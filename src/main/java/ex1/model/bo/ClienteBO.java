@@ -4,6 +4,7 @@ import ex1.controller.LinhaTelefonicaController;
 import ex1.model.dao.AddressDAO;
 import ex1.model.dao.ClientDAO;
 import ex1.model.dao.PhoneDAO;
+import ex1.model.exception.ClientePossuiLinhaTelefonicaException;
 import ex1.model.vo.AddressVO;
 import ex1.model.vo.ClienteVO;
 import ex1.model.vo.LinhaTelefonicaVO;

@@ -1,18 +1,16 @@
 package ex1.model.dao;
 
-import ex1.controller.AddressController;
-import ex1.controller.LinhaTelefonicaController;
-import ex1.model.vo.AddressVO;
-import ex1.model.vo.ClienteVO;
 import ex1.model.vo.PhoneVO;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class PhoneDAO {
+    Logger logger = Logger.getLogger(AddressDAO.class.getName());
     public PhoneVO addPhone(PhoneVO phoneVO) throws SQLException {
         Connection conn = Banco.getConnection();
-        // Statement stmt = Banco.getStatement(conn);
         String query = "INSERT INTO TELEFONE (DDI,DDD,NUMERO,TIPO,ATIVO) VALUES(?,?,?,?,False)";
         PreparedStatement pstm = Banco.getPreparedStatementWithPK(conn, query);
         pstm.setInt(1, phoneVO.getDdi());
@@ -28,18 +26,16 @@ public class PhoneDAO {
                 id = rs.getInt(1);
             }
             phoneVO.setId(id);
-            System.out.println(phoneVO.toString());
         } catch (SQLException e) {
-            System.out.println("Erro ao executar a query de cadastrar telefone.");
-            System.out.println("Erro: " + e.getMessage());
+            logger.log(Level.INFO, "Erro ao executar a query de cadastrar telefone.");
+            logger.log(Level.INFO, e.getMessage());
             return null;
         } finally {
-            // Banco.closeStatement(stmt);
             Banco.closePreparedStatement(pstm);
             Banco.closeConnection(conn);
-            System.out.println("Telefone cadastrado cadastrado!");
-            return phoneVO;
+
         }
+        return phoneVO;
     }
 
     public boolean updatePhone(PhoneVO phoneVO) throws SQLException {
@@ -60,8 +56,8 @@ public class PhoneDAO {
                 retorno = true;
             }
         } catch (SQLException e) {
-            System.out.println("Erro ao executar a query de atualização do telefone.");
-            System.out.println("Erro: " + e.getMessage());
+            logger.log(Level.INFO, "Erro ao executar a query de atualização telefone.");
+            logger.log(Level.INFO, e.getMessage());
         } finally {
             Banco.closeStatement(stmt);
             Banco.closeConnection(conn);
@@ -81,8 +77,8 @@ public class PhoneDAO {
                 retorno = true;
             }
         } catch (SQLException e) {
-            System.out.println("Erro ao executar a query que deleta o telefone.");
-            System.out.println("Erro: " + e.getMessage());
+            logger.log(Level.INFO, "Erro ao executar a query de deletar o telefone.");
+            logger.log(Level.INFO, e.getMessage());
         } finally {
             Banco.closeStatement(stmt);
             Banco.closeConnection(conn);
@@ -95,12 +91,11 @@ public class PhoneDAO {
         Statement stmt = Banco.getStatement(conn);
         ResultSet resultado = null;
         String query;
-        ArrayList<PhoneVO> telefoneVOlist = new ArrayList<PhoneVO>();
         PhoneVO phoneVO = new PhoneVO();
 
             query = "SELECT * FROM TELEFONE WHERE IDTELEFONE = ?";
         PreparedStatement pstm = Banco.getPreparedStatement(conn, query);
-        pstm.setInt(1, phoneVO.getId());
+        pstm.setInt(1, id);
 
 
         try {
@@ -112,12 +107,11 @@ public class PhoneDAO {
                 phoneVO.setNumber(resultado.getString(4));
                 phoneVO.setType(resultado.getInt(5));
                 phoneVO.setActive(resultado.getBoolean(6));
-
             }
 
         } catch (SQLException e) {
-            System.out.println("Erro ao executar a query que busca os telefones.");
-            System.out.println("Erro: " + e.getMessage());
+            logger.log(Level.INFO, "Erro ao executar a query que busca os telefone.");
+            logger.log(Level.INFO, e.getMessage());
         } finally {
             Banco.closeResultSet(resultado);
             Banco.closeStatement(stmt);
@@ -132,27 +126,25 @@ public class PhoneDAO {
         Statement stmt = Banco.getStatement(conn);
         ResultSet resultado = null;
         String query;
-        ArrayList<PhoneVO> telefoneVOlist = new ArrayList<PhoneVO>();
+
 
         Boolean resp = false;
-        System.out.println(phoneVO);
         if(phoneVO != null) {
             query = "SELECT * FROM TELEFONE WHERE IDTELEFONE = " + phoneVO.getId();
-
 
             try {
                 resultado = stmt.executeQuery(query);
                 if (resultado.next()) {
 
-                    if (resultado.getBoolean(6) == true) {
+                    if (resultado.getBoolean(6)) {
                         resp = true;
                     }
 
                 }
 
             } catch (SQLException e) {
-                System.out.println("Erro ao executar a query que busca os telefones.");
-                System.out.println("Erro: " + e.getMessage());
+                logger.log(Level.INFO, "Erro ao executar que verifica se o telefone está ativo.");
+                logger.log(Level.INFO, e.getMessage());
             } finally {
                 Banco.closeResultSet(resultado);
                 Banco.closeStatement(stmt);
@@ -168,9 +160,6 @@ public class PhoneDAO {
         ResultSet resultado = null;
         String query;
         ArrayList<PhoneVO> phoneVOlist = new ArrayList<PhoneVO>();
-
-        AddressController addressController = new AddressController();
-        LinhaTelefonicaController linhaTelefonicaController = new LinhaTelefonicaController();
 
         query = "SELECT * FROM TELEFONE";
 
@@ -189,8 +178,8 @@ public class PhoneDAO {
             }
 
         } catch (SQLException e) {
-            System.out.println("Erro ao executar a query que busca todos os telefones.");
-            System.out.println("Erro: " + e.getMessage());
+            logger.log(Level.INFO, "Erro ao executar a query que busca todos os telefones.");
+            logger.log(Level.INFO, e.getMessage());
         } finally {
             Banco.closeResultSet(resultado);
             Banco.closeStatement(stmt);
@@ -209,12 +198,12 @@ public class PhoneDAO {
                 retorno = true;
             }
         } catch (SQLException e) {
-            System.out.println("Erro ao executar a query de ativação da linha telefonica.");
-            System.out.println("Erro: " + e.getMessage());
+            logger.log(Level.INFO, "Erro ao executar a query de ativação da linha telefonica.");
+            logger.log(Level.INFO, e.getMessage());
         } finally {
             Banco.closeStatement(stmt);
             Banco.closeConnection(conn);
         }
-        return true;
+        return retorno;
     }
 }
