@@ -27,22 +27,22 @@ public class LinhaTelefonicaBO {
         return linhaTelefonicaDAO.updateLine(linhaTelefonicaVO);
     }
 
-    public ArrayList<LinhaTelefonicaVO> findPhoneByClient(Integer idcliente) {
+    public ArrayList<LinhaTelefonicaVO> findPhoneByClient(Integer idcliente) throws SQLException {
         LinhaTelefonicaDAO linhaTelefonicaDAO = new LinhaTelefonicaDAO();
         return linhaTelefonicaDAO.findPhoneByClient(idcliente);
     }
 
-    public boolean disableLine(LinhaTelefonicaVO linhaTelefonicaVO) {
+    public boolean disableLine(LinhaTelefonicaVO linhaTelefonicaVO) throws SQLException {
         LinhaTelefonicaDAO linhaTelefonicaDAO = new LinhaTelefonicaDAO();
         return linhaTelefonicaDAO.disableLine(linhaTelefonicaVO);
     }
 
-    public LinhaTelefonicaVO findLine(Integer idtelefone) {
+    public LinhaTelefonicaVO findLine(Integer idtelefone) throws SQLException {
         LinhaTelefonicaDAO linhaTelefonicaDAO = new LinhaTelefonicaDAO();
         return linhaTelefonicaDAO.findLine(idtelefone);
     }
 
-    public Boolean turnActive(Integer idPhone) {
+    public Boolean turnActive(Integer idPhone) throws SQLException {
         LinhaTelefonicaDAO linhaTelefonicaDAO = new LinhaTelefonicaDAO();
         return linhaTelefonicaDAO.turnActive(idPhone);
     }

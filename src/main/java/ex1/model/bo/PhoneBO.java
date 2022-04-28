@@ -23,7 +23,7 @@ public class PhoneBO {
         return phoneDAO.updatePhone(phoneVO);
     }
 
-    public PhoneVO findPhone(Integer id) {
+    public PhoneVO findPhone(Integer id) throws SQLException {
         PhoneDAO phoneDAO = new PhoneDAO();
         return phoneDAO.findPhone(id);
     }

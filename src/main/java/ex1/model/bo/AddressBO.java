@@ -21,12 +21,12 @@ public class AddressBO {
         }
     }
 
-    public Boolean deletAdress(AddressVO adressvo) {
+    public Boolean deletAdress(AddressVO adressvo) throws SQLException {
         AddressDAO adressDAO = new AddressDAO();
         return adressDAO.deletAdress(adressvo);
     }
 
-    public Boolean updateAddress(AddressVO adressvo) {
+    public Boolean updateAddress(AddressVO adressvo) throws SQLException {
         AddressDAO adressDAO = new AddressDAO();
         return adressDAO.updateAddress(adressvo);
     }

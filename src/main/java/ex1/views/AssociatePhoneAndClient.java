@@ -56,7 +56,12 @@ public class AssociatePhoneAndClient extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 ClienteVO client = (ClienteVO) clienteBox.getSelectedItem();
                 PhoneVO telefone = (PhoneVO) telefoneBox.getSelectedItem();
-                LinhaTelefonicaVO line = linhaTelefonicaController.findLine(telefone.getId());
+                LinhaTelefonicaVO line = null;
+                try {
+                    line = linhaTelefonicaController.findLine(telefone.getId());
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
                 try {
                     linhaTelefonicaController.disableLine(line);
                     Boolean turnOff = phoneController.turnOffPhone(telefone.getId());

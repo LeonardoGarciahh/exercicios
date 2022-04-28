@@ -42,16 +42,21 @@ public class PhoneDAO {
         }
     }
 
-    public boolean updatePhone(PhoneVO phoneVO) {
+    public boolean updatePhone(PhoneVO phoneVO) throws SQLException {
         Connection conn = Banco.getConnection();
         Statement stmt = Banco.getStatement(conn);
         boolean retorno = false;
-        String query = "UPDATE TELEFONE set DDI = '" + phoneVO.getDdi() + "', DDD = '"
-                + phoneVO.getDdd()   + "', NUMERO = '" + phoneVO.getNumber()
-                + "', TIPO = '" + phoneVO.getType() + "', ATIVO = '" + phoneVO.getActive()+
-                "'WHERE IDTELEFONE = " + phoneVO.getId();
+        String query = "UPDATE TELEFONE set DDI = ?, DDD = ?, NUMERO = ?, TIPO = ?, ATIVO = ? WHERE IDTELEFONE = ?";
+        PreparedStatement pstm = Banco.getPreparedStatement(conn, query);
+
+        pstm.setInt(1, phoneVO.getDdi());
+        pstm.setInt(2, phoneVO.getDdd());
+        pstm.setString(3, phoneVO.getNumber());
+        pstm.setInt(4, phoneVO.getType());
+        pstm.setBoolean(5, phoneVO.getActive());
+        pstm.setInt(6, phoneVO.getId());
         try {
-            if (stmt.executeUpdate(query) == 1) {
+            if (pstm.execute() == true) {
                 retorno = true;
             }
         } catch (SQLException e) {
@@ -64,13 +69,15 @@ public class PhoneDAO {
         return retorno;
     }
 
-    public boolean deletPhone(PhoneVO phoneVO) {
+    public boolean deletPhone(PhoneVO phoneVO) throws SQLException {
         Connection conn = Banco.getConnection();
         Statement stmt = Banco.getStatement(conn);
         boolean retorno = false;
-        String query = "DELETE FROM TELEFONE WHERE IDTELEFONE = " + phoneVO.getId();
+        String query = "DELETE FROM TELEFONE WHERE IDTELEFONE = ?";
+        PreparedStatement pstm = Banco.getPreparedStatement(conn, query);
+        pstm.setInt(1, phoneVO.getId());
         try {
-            if (stmt.executeUpdate(query) == 1) {
+            if (pstm.execute()== true) {
                 retorno = true;
             }
         } catch (SQLException e) {
@@ -83,7 +90,7 @@ public class PhoneDAO {
         return retorno;
     }
 
-    public PhoneVO findPhone(Integer id){
+    public PhoneVO findPhone(Integer id) throws SQLException {
         Connection conn = Banco.getConnection();
         Statement stmt = Banco.getStatement(conn);
         ResultSet resultado = null;
@@ -91,11 +98,13 @@ public class PhoneDAO {
         ArrayList<PhoneVO> telefoneVOlist = new ArrayList<PhoneVO>();
         PhoneVO phoneVO = new PhoneVO();
 
-            query = "SELECT * FROM TELEFONE WHERE IDTELEFONE = " + id;
+            query = "SELECT * FROM TELEFONE WHERE IDTELEFONE = ?";
+        PreparedStatement pstm = Banco.getPreparedStatement(conn, query);
+        pstm.setInt(1, phoneVO.getId());
 
 
         try {
-            resultado = stmt.executeQuery(query);
+            resultado = pstm.executeQuery();
             if (resultado.next()) {
                 phoneVO.setId(resultado.getInt(1));
                 phoneVO.setDdi(resultado.getInt(2));

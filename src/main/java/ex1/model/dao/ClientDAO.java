@@ -41,15 +41,18 @@ public class ClientDAO {
         }
     }
 
-    public boolean updateClient(ClienteVO clienteVO) {
+    public boolean updateClient(ClienteVO clienteVO) throws SQLException {
         Connection conn = Banco.getConnection();
         Statement stmt = Banco.getStatement(conn);
         boolean retorno = false;
-        String query = "UPDATE CLIENTE set IDENDERECO = '" + clienteVO.getAdress().getId() + "', NOME = '"
-                + clienteVO.getName() + "', CPF = '" + clienteVO.getCpf() +
-                "'WHERE IDCLIENTE = " + clienteVO.getId();
+        String query = "UPDATE CLIENTE set IDENDERECO = ?, NOME = ?, CPF = ? WHERE IDCLIENTE = ?";
+        PreparedStatement pstm = Banco.getPreparedStatement(conn, query);
+        pstm.setInt(1, clienteVO.getAdress().getId());
+        pstm.setString(2, clienteVO.getName());
+        pstm.setString(3, clienteVO.getCpf());
+        pstm.setInt(4, clienteVO.getId());
         try {
-            if (stmt.executeUpdate(query) == 1) {
+            if (pstm.execute() == true) {
                 retorno = true;
             }
         } catch (SQLException e) {
@@ -62,13 +65,15 @@ public class ClientDAO {
         return retorno;
     }
 
-    public boolean deletClient(ClienteVO clienteVO) {
+    public boolean deletClient(ClienteVO clienteVO) throws SQLException {
         Connection conn = Banco.getConnection();
         Statement stmt = Banco.getStatement(conn);
         boolean retorno = false;
         String query = "DELETE FROM CLIENTE WHERE IDCLIENTE = " + clienteVO.getId();
+        PreparedStatement pstm = Banco.getPreparedStatement(conn, query);
+        pstm.setInt(1, clienteVO.getId());
         try {
-            if (stmt.executeUpdate(query) == 1) {
+            if (pstm.execute() == true) {
                 retorno = true;
             }
         } catch (SQLException e) {

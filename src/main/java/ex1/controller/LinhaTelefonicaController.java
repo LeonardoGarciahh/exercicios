@@ -37,12 +37,12 @@ public class LinhaTelefonicaController {
         return linhaTelefonicaBO.disableLine(linhaTelefonicaVO);
     }
 
-    public LinhaTelefonicaVO findLine(Integer idtelefone) {
+    public LinhaTelefonicaVO findLine(Integer idtelefone) throws SQLException {
         LinhaTelefonicaBO linhaTelefonicaBO = new LinhaTelefonicaBO();
         return linhaTelefonicaBO.findLine(idtelefone);
     }
 
-    public Boolean turnActive(Integer idPhone){
+    public Boolean turnActive(Integer idPhone) throws SQLException {
         LinhaTelefonicaBO linhaTelefonicaBO = new LinhaTelefonicaBO();
         return linhaTelefonicaBO.turnActive(idPhone);
     }

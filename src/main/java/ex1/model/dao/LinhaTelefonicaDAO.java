@@ -6,6 +6,7 @@ import ex1.model.vo.PhoneVO;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 
 public class LinhaTelefonicaDAO {
@@ -41,16 +42,21 @@ public class LinhaTelefonicaDAO {
         }
     }
 
-    public boolean updateLine(LinhaTelefonicaVO linhaTelefonicaVO) {
+    public boolean updateLine(LinhaTelefonicaVO linhaTelefonicaVO) throws SQLException {
         Connection conn = Banco.getConnection();
         Statement stmt = Banco.getStatement(conn);
         boolean retorno = false;
-        String query = "UPDATE LINHA_TELEFONICA set DT_ATIVACAO = '" + linhaTelefonicaVO.getDT_ACTIVATION() + "', DT_DESATIVACAO = '"
-                + linhaTelefonicaVO.getDT_DESATIVATE() + "', IDCLIENTE = '" + linhaTelefonicaVO.getIdcliente() +
-                "', IDTELEFONE = '" + linhaTelefonicaVO.getIdtelefone() +
-                "'WHERE IDLINHATELEFONICA = " + linhaTelefonicaVO.getId();
+        String query = "UPDATE LINHA_TELEFONICA set DT_ATIVACAO = ?, DT_DESATIVACAO = ?, IDCLIENTE = ?, IDTELEFONE = ? WHERE IDLINHATELEFONICA = ?";
+
+
+        PreparedStatement pstm = Banco.getPreparedStatement(conn, query);
+        pstm.setDate(1, (Date) Date.from(linhaTelefonicaVO.getDT_ACTIVATION().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        pstm.setDate(2, (Date) Date.from(linhaTelefonicaVO.getDT_DESATIVATE().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        pstm.setInt(3, linhaTelefonicaVO.getIdcliente());
+        pstm.setInt(4, linhaTelefonicaVO.getIdtelefone());
+        pstm.setInt(5, linhaTelefonicaVO.getId());
         try {
-            if (stmt.executeUpdate(query) == 1) {
+            if (pstm.execute() == true) {
                 retorno = true;
             }
 
@@ -64,13 +70,15 @@ public class LinhaTelefonicaDAO {
         return retorno;
     }
 
-    public boolean deletLine(LinhaTelefonicaVO linhaTelefonicaVO) {
+    public boolean deletLine(LinhaTelefonicaVO linhaTelefonicaVO) throws SQLException {
         Connection conn = Banco.getConnection();
         Statement stmt = Banco.getStatement(conn);
         boolean retorno = false;
-        String query = "DELETE FROM LINHA_TELEFONICA WHERE IDLINHATELEFONICA = " + linhaTelefonicaVO.getId();
+        String query = "DELETE FROM LINHA_TELEFONICA WHERE IDLINHATELEFONICA = ?";
+        PreparedStatement pstm = Banco.getPreparedStatement(conn, query);
+        pstm.setInt(1, linhaTelefonicaVO.getId());
         try {
-            if (stmt.executeUpdate(query) == 1) {
+            if (pstm.execute() == true) {
                 retorno = true;
             }
         } catch (SQLException e) {
@@ -84,14 +92,18 @@ public class LinhaTelefonicaDAO {
     }
 
 
-    public boolean disableLine(LinhaTelefonicaVO linhaTelefonicaVO){
+    public boolean disableLine(LinhaTelefonicaVO linhaTelefonicaVO) throws SQLException {
         Connection conn = Banco.getConnection();
         Statement stmt = Banco.getStatement(conn);
         boolean retorno = false;
         System.out.println(linhaTelefonicaVO.getId());
-        String query = "UPDATE LINHA_TELEFONICA set DT_DESATIVACAO = now() where IDLINHATELEFONICA="+linhaTelefonicaVO.getId();
+        String query = "UPDATE LINHA_TELEFONICA set DT_DESATIVACAO = now() where IDLINHATELEFONICA= ? ";
+
+        PreparedStatement pstm = Banco.getPreparedStatement(conn, query);
+        pstm.setInt(1, linhaTelefonicaVO.getId());
+
         try {
-            if (stmt.executeUpdate(query) == 1) {
+            if (pstm.execute(query) == true) {
                 retorno = true;
             }
             PhoneController phoneController = new PhoneController();
@@ -105,7 +117,7 @@ public class LinhaTelefonicaDAO {
         return retorno;
     }
 
-    public ArrayList<LinhaTelefonicaVO> findPhoneByClient(Integer idcliente){
+    public ArrayList<LinhaTelefonicaVO> findPhoneByClient(Integer idcliente) throws SQLException {
         Connection conn = Banco.getConnection();
         Statement stmt = Banco.getStatement(conn);
         ResultSet resultado = null;
@@ -113,11 +125,13 @@ public class LinhaTelefonicaDAO {
         ArrayList<LinhaTelefonicaVO> telefoneVOlist = new ArrayList<LinhaTelefonicaVO>();
         PhoneVO phoneVO = new PhoneVO();
 
-        query = "SELECT * FROM LINHA_TELEFONICA WHERE IDCLIENTE = " + idcliente+" and DT_DESATIVACAO IS NULL";
+        query = "SELECT * FROM LINHA_TELEFONICA WHERE IDCLIENTE = ? and DT_DESATIVACAO IS NULL";
+        PreparedStatement pstm = Banco.getPreparedStatement(conn, query);
+        pstm.setInt(1, idcliente);
         PhoneController phoneController = new PhoneController();
 
         try {
-            resultado = stmt.executeQuery(query);
+            resultado = pstm.executeQuery();
             while (resultado.next()) {
                 LinhaTelefonicaVO linhaTelefonicaVO = new LinhaTelefonicaVO();
                 linhaTelefonicaVO.setId(resultado.getInt(1));
@@ -141,18 +155,21 @@ public class LinhaTelefonicaDAO {
         return telefoneVOlist;
     }
 
-    public LinhaTelefonicaVO findLine(Integer idtelefone){
+    public LinhaTelefonicaVO findLine(Integer idtelefone) throws SQLException {
         Connection conn = Banco.getConnection();
         Statement stmt = Banco.getStatement(conn);
         ResultSet resultado = null;
         String query;
 
-        query = "SELECT * FROM LINHA_TELEFONICA WHERE IDTELEFONE = " + idtelefone+" and DT_DESATIVACAO IS NULL";
+        query = "SELECT * FROM LINHA_TELEFONICA WHERE IDTELEFONE = ? and DT_DESATIVACAO IS NULL";
+        PreparedStatement pstm = Banco.getPreparedStatement(conn, query);
+        pstm.setInt(1, idtelefone);
+
         PhoneController phoneController = new PhoneController();
 
                 LinhaTelefonicaVO linhaTelefonicaVO = new LinhaTelefonicaVO();
         try {
-            resultado = stmt.executeQuery(query);
+            resultado = pstm.executeQuery();
             if (resultado.next()) {
                 linhaTelefonicaVO.setId(resultado.getInt(1));
                 linhaTelefonicaVO.setIdcliente(resultado.getInt(4));
@@ -172,13 +189,16 @@ public class LinhaTelefonicaDAO {
         return linhaTelefonicaVO;
     }
 
-    public boolean turnActive(Integer idPhone){
+    public boolean turnActive(Integer idPhone) throws SQLException {
         Connection conn = Banco.getConnection();
         Statement stmt = Banco.getStatement(conn);
         boolean retorno = false;
-        String query = "UPDATE TELEFONE set ATIVO = True where idtelefone="+idPhone;
+        String query = "UPDATE TELEFONE set ATIVO = True where idtelefone= ?";
+        PreparedStatement pstm = Banco.getPreparedStatement(conn, query);
+        pstm.setInt(1, idPhone);
+
         try {
-            if (stmt.executeUpdate(query) == 1) {
+            if (pstm.execute() == true) {
                 retorno = true;
             }
         } catch (SQLException e) {

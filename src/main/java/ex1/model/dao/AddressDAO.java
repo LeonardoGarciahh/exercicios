@@ -40,16 +40,21 @@ public class AddressDAO {
         }
     }
 
-    public boolean updateAddress(AddressVO addressVO) {
+    public boolean updateAddress(AddressVO addressVO) throws SQLException {
         Connection conn = Banco.getConnection();
         Statement stmt = Banco.getStatement(conn);
         boolean retorno = false;
-        String query = "UPDATE ENDERECO set RUA = '" + addressVO.getStreet() + "', CEP = '"
-                + addressVO.getCep() + "', CIDADE = '" + addressVO.getCity() + "', ESTADO = '" + addressVO.getState()
-                + "', UF = '" + addressVO.getUf() + "', NUMERO = '" + addressVO.getNumber()
-                + "' WHERE IDENDERECO = " + addressVO.getId();
+        String query = "UPDATE ENDERECO set RUA = ?, CEP = ?, CIDADE = ?, ESTADO = ?, UF = ?, NUMERO = ? WHERE IDENDERECO = ?";
+        PreparedStatement pstm = Banco.getPreparedStatement(conn, query);
+        pstm.setString(1, addressVO.getStreet());
+        pstm.setString(2, addressVO.getCep());
+        pstm.setString(3, addressVO.getCity());
+        pstm.setString(4,addressVO.getState());
+        pstm.setString(5,addressVO.getUf());
+        pstm.setInt(6,addressVO.getNumber());
+        pstm.setInt(7,addressVO.getId());
         try {
-            if (stmt.executeUpdate(query) == 1) {
+            if (pstm.execute() == true) {
                 retorno = true;
             }
         } catch (SQLException e) {
@@ -62,13 +67,15 @@ public class AddressDAO {
         return retorno;
     }
 
-    public boolean deletAdress(AddressVO addressVO) {
+    public boolean deletAdress(AddressVO addressVO) throws SQLException {
         Connection conn = Banco.getConnection();
         Statement stmt = Banco.getStatement(conn);
         boolean retorno = false;
-        String query = "DELETE FROM ENDERECO WHERE IDENDERECO = " + addressVO.getId();
+        String query = "DELETE FROM ENDERECO WHERE IDENDERECO = ?";
+        PreparedStatement pstm = Banco.getPreparedStatement(conn, query);
+        pstm.setInt(1,addressVO.getId());
         try {
-            if (stmt.executeUpdate(query) == 1) {
+            if (pstm.execute() == true) {
                 retorno = true;
             }
         } catch (SQLException e) {
