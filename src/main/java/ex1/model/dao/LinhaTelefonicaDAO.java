@@ -56,7 +56,7 @@ public class LinhaTelefonicaDAO {
         pstm.setInt(4, linhaTelefonicaVO.getIdtelefone());
         pstm.setInt(5, linhaTelefonicaVO.getId());
         try {
-            if (pstm.execute() == true) {
+            if (pstm.executeUpdate() == 1) {
                 retorno = true;
             }
 
@@ -78,7 +78,7 @@ public class LinhaTelefonicaDAO {
         PreparedStatement pstm = Banco.getPreparedStatement(conn, query);
         pstm.setInt(1, linhaTelefonicaVO.getId());
         try {
-            if (pstm.execute() == true) {
+            if (pstm.executeUpdate() == 1) {
                 retorno = true;
             }
         } catch (SQLException e) {

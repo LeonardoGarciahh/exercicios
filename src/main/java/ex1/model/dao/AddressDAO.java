@@ -9,7 +9,6 @@ public class AddressDAO {
     //inserir
     public AddressVO addAdress(AddressVO adressVO) throws SQLException {
         Connection conn = Banco.getConnection();
-        // Statement stmt = Banco.getStatement(conn);
         String query = "INSERT INTO ENDERECO (RUA,CEP,CIDADE,ESTADO,UF,NUMERO) VALUES(?,?,?,?,?,?)";
         PreparedStatement pstm = Banco.getPreparedStatementWithPK(conn, query);
         pstm.setString(1, adressVO.getStreet());
@@ -54,7 +53,7 @@ public class AddressDAO {
         pstm.setInt(6,addressVO.getNumber());
         pstm.setInt(7,addressVO.getId());
         try {
-            if (pstm.execute() == true) {
+            if (pstm.executeUpdate() == 1) {
                 retorno = true;
             }
         } catch (SQLException e) {
@@ -75,7 +74,7 @@ public class AddressDAO {
         PreparedStatement pstm = Banco.getPreparedStatement(conn, query);
         pstm.setInt(1,addressVO.getId());
         try {
-            if (pstm.execute() == true) {
+            if (pstm.executeUpdate() == 1) {
                 retorno = true;
             }
         } catch (SQLException e) {

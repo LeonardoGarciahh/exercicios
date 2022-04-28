@@ -52,7 +52,7 @@ public class ClientDAO {
         pstm.setString(3, clienteVO.getCpf());
         pstm.setInt(4, clienteVO.getId());
         try {
-            if (pstm.execute() == true) {
+            if (pstm.executeUpdate() == 1) {
                 retorno = true;
             }
         } catch (SQLException e) {
@@ -69,11 +69,11 @@ public class ClientDAO {
         Connection conn = Banco.getConnection();
         Statement stmt = Banco.getStatement(conn);
         boolean retorno = false;
-        String query = "DELETE FROM CLIENTE WHERE IDCLIENTE = " + clienteVO.getId();
+        String query = "DELETE FROM CLIENTE WHERE IDCLIENTE = ?";
         PreparedStatement pstm = Banco.getPreparedStatement(conn, query);
         pstm.setInt(1, clienteVO.getId());
         try {
-            if (pstm.execute() == true) {
+            if (pstm.executeUpdate() == 1) {
                 retorno = true;
             }
         } catch (SQLException e) {

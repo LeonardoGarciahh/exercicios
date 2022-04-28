@@ -56,7 +56,7 @@ public class PhoneDAO {
         pstm.setBoolean(5, phoneVO.getActive());
         pstm.setInt(6, phoneVO.getId());
         try {
-            if (pstm.execute() == true) {
+            if (pstm.executeUpdate() == 1) {
                 retorno = true;
             }
         } catch (SQLException e) {
@@ -77,7 +77,7 @@ public class PhoneDAO {
         PreparedStatement pstm = Banco.getPreparedStatement(conn, query);
         pstm.setInt(1, phoneVO.getId());
         try {
-            if (pstm.execute()== true) {
+            if (pstm.executeUpdate()== 1) {
                 retorno = true;
             }
         } catch (SQLException e) {
