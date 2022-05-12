@@ -88,6 +88,10 @@ public class Menu extends JFrame{
             ClienteVO client = new ClienteVO();
             client.setId(showAllClients.getSelectedClient());
             Register register = new Register(client);
+            register.getRegisterButton().addActionListener(e2 ->{
+                callAllClientsScreen();
+
+            });
             setContentPane(register);
             revalidate();
         });
@@ -102,6 +106,7 @@ public class Menu extends JFrame{
         });
         setContentPane(showAllClients);
         revalidate();
+
     }
 
     public static void showScreen()  {

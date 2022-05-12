@@ -25,26 +25,15 @@ public class ShowAllPhones extends JPanel {
     public ShowAllPhones() {
         this.add(panel1);
         setSize(600,250);
+
         DefaultTableModel tableModel = new DefaultTableModel(new String[]{"DDI", "DDD", "NUMERO","TIPO","ATIVO"}, 0);
+
         table1.setModel(tableModel);
         tableModel.addRow(new Object[]{"DDI", "DDD", "NUMERO","TIPO","ATIVO",});
+
         for (PhoneVO phone: phones) {
             tableModel.addRow(new Object[]{(phone.getDdd()), (phone.getDdd()), (phone.getNumber()),((phone.getType()==0)?"Movel":"Fixo"),(phone.getActive())});
         }
-
-//        table1.setEnabled(false);
-//        button1.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                Integer phoneIndex = table1.getSelectionModel().getAnchorSelectionIndex();
-//                PhoneController phoneController = new PhoneController();
-//                try {
-//                    phoneController.deletPhone(phones.get(phoneIndex));
-//                } catch (SQLException ex) {
-//                    ex.printStackTrace();
-//                }
-//            }
-//        });
     }
 
 }

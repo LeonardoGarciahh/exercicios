@@ -27,6 +27,9 @@ public class Register extends JPanel {
     public JComboBox addresBox;
     private ArrayList<AddressVO> addressList;
 
+    public JButton getRegisterButton() {
+        return registerButton;
+    }
 
     public Register(ClienteVO client) {
         this.add(mainPanel);
@@ -76,6 +79,7 @@ public class Register extends JPanel {
                        JOptionPane.showMessageDialog(null,"Salvo com sucesso!");
                        clearAddressInput();
                        clearClientInput();
+
 
                    }
                } catch (SQLException ex) {
