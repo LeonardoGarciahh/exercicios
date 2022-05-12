@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -48,7 +49,6 @@ public class ShowAllClients extends JPanel{
         table1.setDefaultEditor(Object.class, null);
         table1.setModel(tableModel);
         table1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        tableModel.addRow(new Object[]{"ID", "Nome", "CPF"});
         for (ClienteVO cliente: clients) {
             tableModel.addRow(new Object[]{(cliente.getId()), (cliente.getName()), (cliente.getCpf())});
         }

@@ -74,6 +74,8 @@ public class Register extends JPanel {
                    if(clienteController.addClient(cliente)){
 
                        JOptionPane.showMessageDialog(null,"Salvo com sucesso!");
+                       clearAddressInput();
+                       clearClientInput();
                    }
                } catch (SQLException ex) {
                    ex.printStackTrace();
@@ -183,6 +185,11 @@ public class Register extends JPanel {
         cepField.setText("");
         numberField.setText("");
         stateField.setText("");
+        nameField.setText("");
+    }
+
+    public void clearClientInput(){
+        cpfField.setText("");
         nameField.setText("");
     }
 
