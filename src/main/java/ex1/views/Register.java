@@ -76,6 +76,7 @@ public class Register extends JPanel {
                        JOptionPane.showMessageDialog(null,"Salvo com sucesso!");
                        clearAddressInput();
                        clearClientInput();
+
                    }
                } catch (SQLException ex) {
                    ex.printStackTrace();

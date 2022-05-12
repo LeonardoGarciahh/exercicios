@@ -76,28 +76,32 @@ public class Menu extends JFrame{
         });
 
         menuItemListAllClients.addActionListener(e -> {
-                final ShowAllClients showAllClients = new ShowAllClients();
-                showAllClients.getEditBtn().addActionListener(e1 -> {
+                callAllClientsScreen();
+        });
 
-                    ClienteVO client = new ClienteVO();
-                    client.setId(showAllClients.getSelectedClient());
-                    Register register = new Register(client);
-                    setContentPane(register);
-                    revalidate();
-                });
+    }
 
-                showAllClients.getClienteButton().addActionListener(e1 -> {
+    private void callAllClientsScreen() {
+        final ShowAllClients showAllClients = new ShowAllClients();
+        showAllClients.getEditBtn().addActionListener(e1 -> {
 
-                    ClienteVO client = new ClienteVO();
-
-                    Register register = new Register(client);
-                    setContentPane(register);
-                    revalidate();
-                });
-            setContentPane(showAllClients);
+            ClienteVO client = new ClienteVO();
+            client.setId(showAllClients.getSelectedClient());
+            Register register = new Register(client);
+            setContentPane(register);
             revalidate();
         });
 
+        showAllClients.getClienteButton().addActionListener(e1 -> {
+
+            ClienteVO client = new ClienteVO();
+
+            Register register = new Register(client);
+            setContentPane(register);
+            revalidate();
+        });
+        setContentPane(showAllClients);
+        revalidate();
     }
 
     public static void showScreen()  {

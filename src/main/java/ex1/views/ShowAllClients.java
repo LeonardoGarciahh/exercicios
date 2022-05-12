@@ -7,9 +7,6 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -60,10 +57,10 @@ public class ShowAllClients extends JPanel{
                 // print first column value from selected row
                 if(table1.getSelectedRow() != -1) {
                     try {
-                        if (((Integer) table1.getValueAt(table1.getSelectedRow(), 0)) > 0) {
+
                             editBtn.setEnabled(true);
                             deleteBtn.setEnabled(true);
-                        }
+
                     }catch(Exception e){
                         deleteBtn.setEnabled(false);
                         editBtn.setEnabled(false);
@@ -72,27 +69,21 @@ public class ShowAllClients extends JPanel{
             }
         });
 
-        deleteBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ClienteVO client = new ClienteVO();
-                try {
-                    client.setId((Integer) table1.getValueAt(table1.getSelectedRow(), 0));
+        deleteBtn.addActionListener(e -> {
+            ClienteVO client = new ClienteVO();
+            try {
+                client.setId((Integer) table1.getValueAt(table1.getSelectedRow(), 0));
 
-                    DeletClient deletClient = new DeletClient(client);
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
+                DeletClient deletClient = new DeletClient(client);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
             }
         });
-        updateBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    updateTable();
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
+        updateBtn.addActionListener(e -> {
+            try {
+                updateTable();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
             }
         });
 
@@ -109,7 +100,6 @@ public class ShowAllClients extends JPanel{
         ArrayList<ClienteVO> clients = clienteController.findAllClients();
         DefaultTableModel tableModel = new DefaultTableModel(new String[]{"ID", "Nome", "CPF"}, 0);
         table1.setModel(tableModel);
-        tableModel.addRow(new Object[]{"ID", "Nome", "CPF"});
         table1.clearSelection();
         deleteBtn.setEnabled(false);
         editBtn.setEnabled(false);
