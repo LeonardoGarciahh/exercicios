@@ -24,7 +24,7 @@ public class Menu extends JFrame{
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
 
-        JMenu mnNewMenu = new JMenu("New menu");
+        JMenu mnNewMenu = new JMenu("Menu");
         menuBar.add(mnNewMenu);
 
         JMenuItem menuItemTelefone = new JMenuItem("Telefone");
@@ -80,8 +80,16 @@ public class Menu extends JFrame{
                 showAllClients.getEditBtn().addActionListener(e1 -> {
 
                     ClienteVO client = new ClienteVO();
-
                     client.setId(showAllClients.getSelectedClient());
+                    Register register = new Register(client);
+                    setContentPane(register);
+                    revalidate();
+                });
+
+                showAllClients.getClienteButton().addActionListener(e1 -> {
+
+                    ClienteVO client = new ClienteVO();
+
                     Register register = new Register(client);
                     setContentPane(register);
                     revalidate();

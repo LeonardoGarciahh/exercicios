@@ -25,6 +25,10 @@ public class ShowAllClients extends JPanel{
         return editBtn;
     }
 
+    public JButton getClienteButton() {
+        return clienteButton;
+    }
+
     public Integer getSelectedClient(){
         return (Integer) table1.getValueAt(table1.getSelectedRow(), 0);
     }
@@ -67,18 +71,7 @@ public class ShowAllClients extends JPanel{
                 }
             }
         });
-//        editBtn.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                ClienteVO client = new ClienteVO();
-//                try {
-//                    client.setId((Integer) table1.getValueAt(table1.getSelectedRow(), 0));
-//                    Register register = new Register(client);
-//                } catch (SQLException ex) {
-//                    ex.printStackTrace();
-//                }
-//            }
-//        });
+
         deleteBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -102,15 +95,7 @@ public class ShowAllClients extends JPanel{
                 }
             }
         });
-        clienteButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
-                    ClienteVO client = new ClienteVO();
-                    Register register = new Register(client);
-
-            }
-        });
     }
     public static void showScreen() {
         ShowAllClients showAllClients = new ShowAllClients();
