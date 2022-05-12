@@ -1,16 +1,10 @@
 package ex1.model.bo;
 
 import ex1.controller.LinhaTelefonicaController;
-import ex1.model.dao.AddressDAO;
 import ex1.model.dao.ClientDAO;
-import ex1.model.dao.PhoneDAO;
-import ex1.model.exception.ClientePossuiLinhaTelefonicaException;
-import ex1.model.vo.AddressVO;
 import ex1.model.vo.ClienteVO;
 import ex1.model.vo.LinhaTelefonicaVO;
-import ex1.model.vo.PhoneVO;
 
-import javax.swing.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 

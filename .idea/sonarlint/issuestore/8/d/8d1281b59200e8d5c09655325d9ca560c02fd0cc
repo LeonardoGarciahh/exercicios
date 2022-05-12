@@ -1,0 +1,32 @@
+
+b	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(·š†‡
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Î…éß
+b
+java:S1223"LRename this method to prevent any misunderstanding or make it a constructor.(Á¯¦þ
+X
+java:S1128"=Remove this unused import 'ex1.controller.AddressController'.(Œ¸¯èûÿÿÿÿ
+R
+java:S1128"=Remove this unused import 'ex1.controller.ClienteController'.(ïÇúA
+`
+java:S1128"ERemove this unused import 'ex1.controller.LinhaTelefonicaController'.(Ñ¡êŠþÿÿÿÿ
+Q
+java:S1128";Remove this unused import 'ex1.controller.PhoneController'.(›–×ù
+N
+java:S1128"3Remove this unused import 'ex1.model.vo.AddressVO'.(²­†Šûÿÿÿÿ
+N
+java:S1128"3Remove this unused import 'ex1.model.vo.ClienteVO'.(‚âíøÿÿÿÿÿ
+V
+java:S1128	";Remove this unused import 'ex1.model.vo.LinhaTelefonicaVO'.(µ¸®åþÿÿÿÿ
+L
+java:S1128
+"1Remove this unused import 'ex1.model.vo.PhoneVO'.(½È üùÿÿÿÿ
+H
+java:S1128"2Remove this unused import 'ex1.views.DeletClient'.(¸†ã‰
+E
+java:S1128"/Remove this unused import 'ex1.views.Register'.(¸ÕûË
+E
+java:S1128"/Remove this unused import 'ex1.views.Telefone'.(³¨þÅ
+F
+java:S1128"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ
+H
+java:S1128"-Remove this unused import 'java.util.Arrays'.(î–˜Éüÿÿÿÿ

@@ -1,0 +1,10 @@
+
+p
+java:S2293¢"YReplace the type specification in this constructor call with the diamond operator ("<>").(ÕÎŞ¿
+K
+java:S1066‹"/Merge this if statement with the enclosing one.(‘ÖÍªüÿÿÿÿ
+‡
+java:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(àëÅı
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÆœØ±
+A
+java:S3416"+Update this logger to use "PhoneDAO.class".(ÀëØË

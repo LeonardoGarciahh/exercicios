@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class AssociatePhoneAndClient extends JFrame{
+public class AssociatePhoneAndClient extends JPanel{
     private JPanel panel;
     private JComboBox clienteBox;
     private JComboBox telefoneBox;
@@ -25,13 +25,21 @@ public class AssociatePhoneAndClient extends JFrame{
     LinhaTelefonicaController linhaTelefonicaController = new LinhaTelefonicaController();
     PhoneController phoneController = new PhoneController();
 
-    public AssociatePhoneAndClient() throws SQLException {
-        setContentPane(panel);
-        setSize(300,150);
+    public AssociatePhoneAndClient() {
+        this.setSize(600,150);
+        this.add(panel);
 
-        updateList();
+        try {
+            updateList();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-        checkActive((PhoneVO) telefoneBox.getSelectedItem());
+        try {
+            checkActive((PhoneVO) telefoneBox.getSelectedItem());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         Associar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -122,8 +130,6 @@ public class AssociatePhoneAndClient extends JFrame{
     }
     public static void showScreen() throws SQLException {
         AssociatePhoneAndClient associate = new AssociatePhoneAndClient();
-        associate.setResizable(false);
-        associate.setLocationRelativeTo(null);
 //        telefone.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         associate.setVisible(true);
 

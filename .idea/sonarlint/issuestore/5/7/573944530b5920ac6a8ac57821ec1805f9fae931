@@ -1,0 +1,46 @@
+
+t
+java:S2293~"YReplace the type specification in this constructor call with the diamond operator ("<>").(şğÍÒøÿÿÿÿ
+\
+java:S1192""GDefine a constant instead of duplicating this literal "Erro: " 7 times.(ı—†
+‹
+java:S1319y"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(Œˆùùÿÿÿÿ
+P
+java:S1143)"5Remove this return statement from this finally block.(¼ØÕ”ÿÿÿÿÿ
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÆœØ±
+V	java:S125"<This block of commented-out lines of code should be removed.(à·õ×şÿÿÿÿ
+N	java:S106!"9Replace this use of System.out or System.err by a logger.(œø«‘
+M	java:S106""9Replace this use of System.out or System.err by a logger.(ı—†
+Q	java:S125%"<This block of commented-out lines of code should be removed.(˜åÒâ
+N	java:S106("9Replace this use of System.out or System.err by a logger.(ïÀÿ˜
+N
+java:S32525"3Use static access with "java.util.Date" for "from".(ÊûúŞıÿÿÿÿ
+I
+java:S32526"3Use static access with "java.util.Date" for "from".(·¾î
+N	java:S106@"9Replace this use of System.out or System.err by a logger.(İî½
+M	java:S106A"9Replace this use of System.out or System.err by a logger.(ı—†
+N	java:S106V"9Replace this use of System.out or System.err by a logger.(˜ÜÁ
+M	java:S106W"9Replace this use of System.out or System.err by a logger.(ı—†
+N	java:S106d"9Replace this use of System.out or System.err by a logger.(ğ††°
+=
+java:S1125k"'Remove the unnecessary boolean literal.(µî…Ò
+O
+java:S1481n"4Remove this unused "phoneController" local variable.(şßîıÿÿÿÿ
+S	java:S106p"9Replace this use of System.out or System.err by a logger.(Æ¦Àÿûÿÿÿÿ
+M	java:S106q"9Replace this use of System.out or System.err by a logger.(ı—†
+B
+java:S1481",Remove this unused "phoneVO" local variable.(ê¼´Ï
+P
+java:S1481„"4Remove this unused "phoneController" local variable.(şßîıÿÿÿÿ
+T	java:S106”"9Replace this use of System.out or System.err by a logger.(à¢ÇÁıÿÿÿÿ
+N	java:S106•"9Replace this use of System.out or System.err by a logger.(ı—†
+P
+java:S1481©"4Remove this unused "phoneController" local variable.(şßîıÿÿÿÿ
+T	java:S106¶"9Replace this use of System.out or System.err by a logger.(ÁÓ³¨ûÿÿÿÿ
+N	java:S106·"9Replace this use of System.out or System.err by a logger.(ı—†
+C
+java:S1481Ä",Remove this unused "retorno" local variable.(–êÒ«
+C
+java:S1125Ê"'Remove the unnecessary boolean literal.(­ §µıÿÿÿÿ
+T	java:S106Î"9Replace this use of System.out or System.err by a logger.(Æ¦Àÿûÿÿÿÿ
+N	java:S106Ï"9Replace this use of System.out or System.err by a logger.(ı—†

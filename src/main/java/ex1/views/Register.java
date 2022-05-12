@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Register extends JFrame {
+public class Register extends JPanel {
     private JTextField cpfField;
     private JTextField cityField;
     private JPanel mainPanel;
@@ -28,8 +28,8 @@ public class Register extends JFrame {
     private ArrayList<AddressVO> addressList;
 
 
-    public Register(ClienteVO client) throws SQLException {
-        setContentPane(mainPanel);
+    public Register(ClienteVO client) {
+        this.add(mainPanel);
         setSize(600,250);
         List<String> list = new ArrayList<>(Arrays.asList("AC",
                 "AL", "AP", "AM", "BA", "CE", "DF",
@@ -39,7 +39,11 @@ public class Register extends JFrame {
         }
         AddressController addressController = new AddressController();
 
-        addressList = addressController.findAllAddress();
+        try {
+            addressList = addressController.findAllAddress();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         for(int c = 0;c<addressList.size();c++){
             addresBox.addItem(addressList.get(c));
         }
@@ -70,7 +74,6 @@ public class Register extends JFrame {
                    if(clienteController.addClient(cliente)){
 
                        JOptionPane.showMessageDialog(null,"Salvo com sucesso!");
-                       this.dispose();
                    }
                } catch (SQLException ex) {
                    ex.printStackTrace();
@@ -136,12 +139,14 @@ public class Register extends JFrame {
             }
         });
 
-        showScreen(client);
+        try {
+            showScreen(client);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void showScreen(ClienteVO client) throws SQLException {
-        this.setResizable(false);
-        this.setLocationRelativeTo(null);
         if(client.getId() >0) {
             setClient(client);
         }

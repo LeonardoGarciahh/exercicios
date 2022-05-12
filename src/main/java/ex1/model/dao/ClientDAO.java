@@ -2,7 +2,6 @@ package ex1.model.dao;
 
 import ex1.controller.AddressController;
 import ex1.controller.LinhaTelefonicaController;
-import ex1.model.exception.ClientePossuiLinhaTelefonicaException;
 import ex1.model.vo.ClienteVO;
 
 import java.sql.*;

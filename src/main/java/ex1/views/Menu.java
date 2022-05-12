@@ -12,16 +12,12 @@ import java.sql.SQLException;
 public class Menu extends JFrame{
 
     private JPanel contentPane;
-    private JButton telefoneButton;
     private JPanel panel;
-    private JButton associarTelefoneAoClienteButton;
-    private JButton allClientsBtn;
-    private JButton allPhonesBtn;
     public static Menu menuFrame;
 
 
     public Menu() {
-        setSize(1000,300);
+        setSize(700,300);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -31,60 +27,74 @@ public class Menu extends JFrame{
         JMenu mnNewMenu = new JMenu("New menu");
         menuBar.add(mnNewMenu);
 
-        JMenuItem mntmNewMenuItem = new JMenuItem("Telefone");
-        mnNewMenu.add(mntmNewMenuItem);
+        JMenuItem menuItemTelefone = new JMenuItem("Telefone");
+        mnNewMenu.add(menuItemTelefone);
 
-        JMenuItem mntmNewMenuItem_1 = new JMenuItem("New menu item");
-        mnNewMenu.add(mntmNewMenuItem_1);
+        JMenuItem menuItemRegister = new JMenuItem("Registrar");
+        mnNewMenu.add(menuItemRegister);
+
+        JMenuItem menuItemListAllClients = new JMenuItem("Listar todos clientes");
+        mnNewMenu.add(menuItemListAllClients);
+
+        JMenuItem menuItemListAllPhones = new JMenuItem("Listar todos telefones");
+        mnNewMenu.add(menuItemListAllPhones);
+
+        JMenuItem menuItemAssociatePhone = new JMenuItem("Associar telefone");
+        mnNewMenu.add(menuItemAssociatePhone);
+
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPane.setLayout(new BorderLayout(0, 0));
         setContentPane(panel);
 
-        mntmNewMenuItem.addActionListener(e -> {
+        menuItemTelefone.addActionListener(e -> {
             Telefone telefone = new Telefone();
             setContentPane(telefone);
             revalidate();
         });
 
-        telefoneButton.addActionListener(e -> {
+        menuItemRegister.addActionListener(e -> {
+            Register register = null;
 
+            ClienteVO clienteVO = new ClienteVO();
+            register = new Register(clienteVO);
+
+            setContentPane(register);
+            revalidate();
         });
 
-        associarTelefoneAoClienteButton.addActionListener(e -> {
-            try {
-                AssociatePhoneAndClient.showScreen();
-
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+        menuItemAssociatePhone.addActionListener(e -> {
+            AssociatePhoneAndClient associatePhoneAndClient = new AssociatePhoneAndClient();
+            setContentPane(associatePhoneAndClient);
+            revalidate();
         });
-        allClientsBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    ShowAllClients.showScreen();
 
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
+        menuItemListAllPhones.addActionListener(e -> {
+            ShowAllPhones showAllPhones = new ShowAllPhones();
+            setContentPane(showAllPhones);
+            revalidate();
         });
-        allPhonesBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    ShowAllPhones.showScreen();
 
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
+        menuItemListAllClients.addActionListener(e -> {
+                final ShowAllClients showAllClients = new ShowAllClients();
+                showAllClients.getEditBtn().addActionListener(e1 -> {
+
+                    ClienteVO client = new ClienteVO();
+
+                    client.setId(showAllClients.getSelectedClient());
+                    Register register = new Register(client);
+                    setContentPane(register);
+                    revalidate();
+                });
+            setContentPane(showAllClients);
+            revalidate();
         });
+
     }
 
-    public static void showScreen() throws SQLException {
+    public static void showScreen()  {
         menuFrame = new Menu();
+        menuFrame.setResizable(false);
         menuFrame.setLocationRelativeTo(null);
         menuFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         menuFrame.setVisible(true);
