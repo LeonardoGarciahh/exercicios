@@ -1,0 +1,8 @@
+
+Ü
+java:S13193"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(Æ∂î≠
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(⁄™Ûó
+>
+java:S1125"(Remove the unnecessary boolean literals.(ô´õ⁄
+T
+java:S1155">Use isEmpty() to check whether the collection is empty or not.(¥Û“Û

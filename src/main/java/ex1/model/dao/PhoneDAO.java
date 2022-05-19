@@ -1,5 +1,6 @@
 package ex1.model.dao;
 
+import ex1.model.selectors.PhoneSelector;
 import ex1.model.vo.PhoneVO;
 
 import java.sql.*;
@@ -205,5 +206,73 @@ public class PhoneDAO {
             Banco.closeConnection(conn);
         }
         return retorno;
+    }
+
+    public ArrayList<PhoneVO> findPhoneBySelector(PhoneSelector phoneSelector) {
+        Connection conn = Banco.getConnection();
+        Statement stmt = Banco.getStatement(conn);
+        ResultSet resultado = null;
+        String query;
+        ArrayList<PhoneVO> phoneVOlist = new ArrayList<PhoneVO>();
+        query = "SELECT * FROM TELEFONE";
+        System.out.println(phoneSelector.temFiltro());
+        if (phoneSelector.temFiltro()) {
+            query = criarFiltros(phoneSelector, query);
+        }
+
+
+        try {
+            resultado = stmt.executeQuery(query);
+            while (resultado.next()) {
+                PhoneVO phoneVO = new PhoneVO();
+                phoneVO.setId(resultado.getInt(1));
+                phoneVO.setDdi(resultado.getInt(2));
+                phoneVO.setDdd(resultado.getInt(3));
+                phoneVO.setNumber(resultado.getString(4));
+                phoneVO.setType(resultado.getInt(5));
+                phoneVO.setActive(resultado.getBoolean(6));
+                phoneVOlist.add(phoneVO);
+            }
+
+        } catch (SQLException e) {
+            logger.log(Level.INFO, "Erro ao executar a query que busca os telefones por selector.");
+            logger.log(Level.INFO, e.getMessage());
+        } finally {
+            Banco.closeResultSet(resultado);
+            Banco.closeStatement(stmt);
+            Banco.closeConnection(conn);
+        }
+
+        return phoneVOlist;
+    }
+
+    public String criarFiltros(PhoneSelector selector, String sql){
+        sql += " WHERE ";
+        boolean primeiro = true;
+
+        if(selector.getDdd() >0){
+            if (!primeiro) {
+                sql += " AND ";
+            }
+            sql += "ddd = " + selector.getDdd();
+            primeiro = false;
+        }
+
+        if(!selector.getTelefone().equals("") && selector.getTelefone().trim().length() >0){
+            if (!primeiro) {
+                sql += " AND ";
+            }
+            sql += "numero = " + selector.getTelefone();
+            primeiro = false;
+        }
+        if(selector.getType() == 0 || selector.getType() == 1){
+            if (!primeiro) {
+                sql += " AND ";
+            }
+            sql += "tipo = " + selector.getType();
+            primeiro = false;
+        }
+        System.out.println(sql);
+        return sql;
     }
 }

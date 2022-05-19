@@ -3,6 +3,7 @@ package ex1.controller;
 import ex1.model.bo.AddressBO;
 import ex1.model.bo.ClienteBO;
 import ex1.model.bo.PhoneBO;
+import ex1.model.selectors.PhoneSelector;
 import ex1.model.vo.AddressVO;
 import ex1.model.vo.ClienteVO;
 import ex1.model.vo.PhoneVO;
@@ -46,6 +47,11 @@ public class PhoneController {
     public Boolean turnOffPhone(Integer idtelefone) throws SQLException {
         PhoneBO phoneBO = new PhoneBO();
         return phoneBO.turnOffPhone(idtelefone);
+    }
+
+    public ArrayList<PhoneVO> findPhoneBySelector(PhoneSelector phoneSelector) throws SQLException {
+        PhoneBO phoneBO = new PhoneBO();
+        return phoneBO.findPhoneBySelector(phoneSelector);
     }
 
 

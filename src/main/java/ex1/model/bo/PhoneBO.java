@@ -1,6 +1,7 @@
 package ex1.model.bo;
 
 import ex1.model.dao.PhoneDAO;
+import ex1.model.selectors.PhoneSelector;
 import ex1.model.vo.PhoneVO;
 
 import java.sql.SQLException;
@@ -41,5 +42,10 @@ public class PhoneBO {
     public Boolean turnOffPhone(Integer idtelefone) {
         PhoneDAO phoneDAO = new PhoneDAO();
         return phoneDAO.turnOffPhone(idtelefone);
+    }
+
+    public ArrayList<PhoneVO> findPhoneBySelector(PhoneSelector phoneSelector) {
+        PhoneDAO phoneDAO = new PhoneDAO();
+        return phoneDAO.findPhoneBySelector(phoneSelector);
     }
 }

@@ -1,0 +1,18 @@
+
+‹
+java:S1319("pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(ÎÛóŒüÿÿÿÿ
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(‡ÜÇ‹
+
+java:S1130"nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(æŞÈŒúÿÿÿÿ8Ò‰—À‹0
+
+java:S1130#"nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(ÉÖø†ÿÿÿÿÿ8Ó‰—À‹0
+
+java:S1130("nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(ÎÛóŒüÿÿÿÿ8Ô‰—À‹0
+Z
+java:S1128"8Remove this unused import 'com.mysql.cj.xdevapi.Client'.(ãô’ÿÿÿÿÿ8Õ‰—À‹0
+U
+java:S1128"3Remove this unused import 'ex1.model.bo.AddressBO'.(àç”ğúÿÿÿÿ8Ö‰—À‹0
+s
+java:S1128"VRemove this unused import 'ex1.model.exception.ClientePossuiLinhaTelefonicaException'.(Üîš€8Ö‰—À‹0
+U
+java:S1128"3Remove this unused import 'ex1.model.vo.AddressVO'.(²­†Šûÿÿÿÿ8Ö‰—À‹0

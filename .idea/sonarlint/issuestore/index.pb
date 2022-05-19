@@ -1,6 +1,4 @@
 
-Y
-)src/main/java/ex1/model/dao/PhoneDAO.java,5\f\5ff6b67e800cdfc6d3ea0d5c3f7ad2e5ebc9bd0b
 c
 3src/main/java/ex1/model/dao/LinhaTelefonicaDAO.java,5\7\573944530b5920ac6a8ac57821ec1805f9fae931
 [
@@ -9,3 +7,19 @@ k
 ;src/main/java/ex1/controller/LinhaTelefonicaController.java,9\e\9eae5240179ab03451970b580a7d6b7e677de34a
 K
 src/main/java/ex1/main.java,8\d\8d1281b59200e8d5c09655325d9ca560c02fd0cc
+U
+%src/main/java/ex1/views/Register.form,1\5\15f499ae5f070fbaf2012ab7a1da4244a38ece11
+U
+%src/main/java/ex1/views/Telefone.form,5\1\51900f1dae031bd22339887a429615585cc6fce1
+Y
+)src/main/java/ex1/model/bo/ClienteBO.java,c\5\c5246d67eba00218b95ecdbd85f229c1da22ec47
+Z
+*src/main/java/ex1/model/dao/ClientDAO.java,c\6\c6eb15b23f8dbaf54bb4385b8ee4788a3d225466
+|
+Lsrc/main/java/ex1/model/exception/ClientePossuiLinhaTelefonicaException.java,e\5\e5e451d2208f414737d3304476e019ab294db979
+c
+3src/main/java/ex1/controller/ClienteController.java,f\2\f23f011f19350de8ef10a2db0474ba52e581489a
+U
+%src/main/java/ex1/views/Telefone.java,2\f\2fd12a728a56dbb76753260b2a02af8bfaec6c9d
+d
+4src/main/java/ex1/views/AssociatePhoneAndClient.form,f\5\f58f0378e9c215ff35942f6ccd519ef2586e03cb
