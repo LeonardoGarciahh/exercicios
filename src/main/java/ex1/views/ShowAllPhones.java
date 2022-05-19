@@ -6,8 +6,6 @@ import ex1.model.vo.PhoneVO;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -16,8 +14,8 @@ public class ShowAllPhones extends JPanel {
     private JPanel panel1;
     private JTextField textFieldDDD;
     private JTextField textFieldPhone;
-    private JTextField textFieldType;
     private JButton buscarButton;
+    private JComboBox comboBox1;
     PhoneController phoneController = new PhoneController();
     ArrayList<PhoneVO> phones;
 
@@ -33,6 +31,10 @@ public class ShowAllPhones extends JPanel {
         this.add(panel1);
         setSize(600,250);
 
+        comboBox1.addItem("Todos");
+        comboBox1.addItem("Movel");
+        comboBox1.addItem("Fixo");
+
         DefaultTableModel tableModel = new DefaultTableModel(new String[]{"DDI", "DDD", "NUMERO","TIPO","ATIVO"}, 0);
 
         table1.setModel(tableModel);
@@ -43,7 +45,7 @@ public class ShowAllPhones extends JPanel {
         buscarButton.addActionListener(e -> {
 
             PhoneSelector phoneSelector = new PhoneSelector((textFieldDDD.getText().equals(""))?-1:Integer.parseInt(textFieldDDD.getText()),
-                    textFieldPhone.getText(), getTypePhone(textFieldType.getText()));
+                    textFieldPhone.getText(), getTypePhone(comboBox1.getSelectedItem().toString()));
             try {
 
                 phones = findPhonesBySelector(phoneSelector);
@@ -65,7 +67,6 @@ public class ShowAllPhones extends JPanel {
     }
 
     public Integer getTypePhone(String type){
-
         if(type.equals("Movel")){
             return 0;
         }else if(type.equals("Fixo")){
