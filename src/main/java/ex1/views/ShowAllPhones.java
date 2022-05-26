@@ -1,11 +1,14 @@
 package ex1.views;
 
 import ex1.controller.PhoneController;
+import ex1.model.report.Report;
 import ex1.model.selectors.PhoneSelector;
 import ex1.model.vo.PhoneVO;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -16,6 +19,7 @@ public class ShowAllPhones extends JPanel {
     private JTextField textFieldPhone;
     private JButton buscarButton;
     private JComboBox comboBox1;
+    private JButton generateButton;
     PhoneController phoneController = new PhoneController();
     ArrayList<PhoneVO> phones;
 
@@ -57,6 +61,13 @@ public class ShowAllPhones extends JPanel {
                 }
             } catch (SQLException ex) {
                 ex.printStackTrace();
+            }
+        });
+        generateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Report report = new Report();
+                report.generateReport(phones);
             }
         });
     }

@@ -1,0 +1,24 @@
+
+†
+java:S1319 "pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(ÀÛñ¤
+’
+java:S13194"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(’‹ùÆÿÿÿÿÿ8à“Ëã0
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(‡ÜÇ‹
+„
+java:S1130 "nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(ÀÛñ¤
+„
+java:S1130*"nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(§„û
+„
+java:S1130/"nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(ÃâÒ
+
+java:S11304"nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(’‹ùÆÿÿÿÿÿ8¼ÆÃä0
+U
+java:S1128"3Remove this unused import 'ex1.model.bo.AddressBO'.(àç”ğúÿÿÿÿ8¼ÆÃä0
+U
+java:S1128"3Remove this unused import 'ex1.model.bo.ClienteBO'.(ó²”¡ıÿÿÿÿ8¼ÆÃä0
+U
+java:S1128"3Remove this unused import 'ex1.model.vo.AddressVO'.(²­†Šûÿÿÿÿ8½ÆÃä0
+U
+java:S1128"3Remove this unused import 'ex1.model.vo.ClienteVO'.(‚âíøÿÿÿÿÿ8½ÆÃä0
+H
+java:S1128"+Remove this unused import 'java.sql.Array'.(Õø‹ù8½ÆÃä0

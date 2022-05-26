@@ -1,0 +1,40 @@
+
+E
+java:S3740"/Provide the parametrized type for this generic.(Ğ°‚
+D
+java:S3740"/Provide the parametrized type for this generic.(ï…'
+o
+java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(ò¯€”
+o
+java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(û…Ìë
+>
+java:S1604+"(Make this anonymous inner class a lambda(õœäº
+C
+java:S1604>"(Make this anonymous inner class a lambda(µ•ü·ıÿÿÿÿ
+>
+java:S1604X"(Make this anonymous inner class a lambda(ñºô‰
+E
+java:S5411L"*Use the primitive boolean expression here.(úşÅÜıÿÿÿÿ
+E
+java:S5411s"*Use the primitive boolean expression here.(àÔ·øÿÿÿÿ
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Éæñäüÿÿÿÿ
+g	java:S116"SRename this field "Associar" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ß‹±'
+?
+java:S1948")Make "clients" transient or serializable.(ò¯€”
+>
+java:S1948"(Make "phones" transient or serializable.(û…Ìë
+I
+java:S1948"3Make "clienteController" transient or serializable.(›Û›§
+V
+java:S1948";Make "linhaTelefonicaController" transient or serializable.(¥˜‹Œÿÿÿÿÿ
+L
+java:S1948"1Make "phoneController" transient or serializable.(şßîıÿÿÿÿ
+h
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(”´ï¬
+P
+java:S1854A":Remove this useless assignment to local variable "client".(…ÌÉÛ
+A
+java:S1481A"+Remove this unused "client" local variable.(…ÌÉÛ
+‘
+java:S1130ƒ"nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(æÌàøûÿÿÿÿ8Ó…Á‹0
+R	java:S125…"<This block of commented-out lines of code should be removed.(¡Øì©
